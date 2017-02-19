@@ -1,4 +1,4 @@
 services:
-#    app.example:
-#        class: App\Bundle\Example
+#    piface_app.example:
+#        class: Piface\AppBundle\Example
 #        arguments: ["@service_id", "plain_value", "%parameter%"]

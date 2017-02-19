@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Bundle\Tests\Controller;
+namespace Piface\AppBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
