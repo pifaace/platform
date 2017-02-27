@@ -5,6 +5,11 @@
     <title>
         {% block title %} Platform {% endblock %}
     </title>
+
+    {% block stylesheets %}
+        {% include 'PifaceAppBundle:Block/Asset:css.html.twig' %}
+    {% endblock %}
+
 </head>
 <body>
 {% block body %}
@@ -14,9 +19,11 @@
 
             {% endblock %}
         </div>
-
     </div>
+
+    {% block javascripts %}
+        {% include 'PifaceAppBundle:Block/Asset:js.html.twig' %}
+    {% endblock %}
 {% endblock %}
-test
 </body>
 </html>

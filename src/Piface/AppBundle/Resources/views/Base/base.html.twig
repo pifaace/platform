@@ -1,0 +1,25 @@
+{% extends 'PifaceAppBundle:Base:root.html.twig' %}
+
+{% block container %}
+    <div class="header">
+        {% block header %}
+            {% block nav_bar %}
+
+            {% endblock %}
+        {% endblock %}
+    </div>
+
+    <div class="page">
+        {% block page %}
+            <div class="page-main">
+                {%  block page_main %}
+                    <div class="page-content">
+                        {% block page_content %}
+
+                        {% endblock %}
+                    </div>
+                {% endblock %}
+            </div>
+        {% endblock %}
+    </div>
+{% endblock %}
