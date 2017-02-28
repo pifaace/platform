@@ -18,6 +18,7 @@ class AppKernel extends Kernel
             new Piface\AppBundle\PifaceAppBundle(),
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new FOS\UserBundle\FOSUserBundle(),
+            new Piface\UserBundle\PifaceUserBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {

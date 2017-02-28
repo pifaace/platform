@@ -1,3 +1,7 @@
+piface_user:
+    resource: "@PifaceUserBundle/Resources/config/routing.yml"
+    prefix:   /
+
 piface_app:
     resource: "@PifaceAppBundle/Resources/config/routing.yml"
     prefix:   /
