@@ -11,7 +11,7 @@ parameters:
 
 framework:
     #esi:             ~
-    #translator:      { fallbacks: ["%locale%"] }
+    translator:      { fallbacks: ["%locale%"] }
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -70,6 +70,9 @@ swiftmailer:
 assetic:
     debug:          '%kernel.debug%'
     use_controller: '%kernel.debug%'
+    bundles:
+        - "PifaceAppBundle"
+        - "PifaceUserBundle"
     filters:
         cssrewrite: ~
 
@@ -78,3 +81,6 @@ fos_user:
     db_driver: orm
     firewall_name: main
     user_class: Piface\UserBundle\Entity\User
+    registration:
+        form:
+            type: Piface\UserBundle\Form\RegistrationFormType
