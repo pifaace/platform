@@ -1,14 +1,13 @@
 <!doctype html>
 <html lang="fr">
 <head>
-    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>
         {% block title %} Platform {% endblock %}
     </title>
-
-    {% block stylesheets %}
-        {% include 'PifaceAppBundle:Block/Asset:css.html.twig' %}
-    {% endblock %}
+    {#{% block stylesheets %}#}
+        {#{% include 'PifaceAppBundle:Block/Asset:css.html.twig' %}#}
+    {#{% endblock %}#}
 
 </head>
 <body>
@@ -21,9 +20,6 @@
         </div>
     </div>
 
-    {% block javascripts %}
-        {% include 'PifaceAppBundle:Block/Asset:js.html.twig' %}
-    {% endblock %}
 {% endblock %}
 </body>
 </html>
