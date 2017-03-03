@@ -1,0 +1,13 @@
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+#container {
+    width: 960px;
+    margin: auto;
+}
+
+#header {
+
+}
