@@ -16,8 +16,8 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new Piface\AppBundle\PifaceAppBundle(),
-            new Symfony\Bundle\AsseticBundle\AsseticBundle(),
 
+            new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new FOS\UserBundle\FOSUserBundle(),
 
             new Piface\UserBundle\PifaceUserBundle(),

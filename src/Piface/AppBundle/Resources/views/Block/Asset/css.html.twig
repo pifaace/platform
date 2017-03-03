@@ -1,5 +1,7 @@
-{#{% stylesheets output="css/compiled/main.css" filter="cssrewrite"#}
-    {#'@PifaceAppBundle/Resources/public/css/style.css'#}
- {#%}#}
-{#<link rel="stylesheet" type="text/css" href="{{ asset_url }}"/>#}
-{#{% endstylesheets %}#}
+{% stylesheets
+'@PifaceAppBundle/Resources/public/css/base.css'
+'@PifaceAppBundle/Resources/public/css/bootstrap.min.css'
+'@PifaceAppBundle/Resources/public/css/bootstrap-theme.min.css'
+filter='cssrewrite' %}
+<link rel="stylesheet" href="{{ asset_url }}"/>
+{% endstylesheets %}
