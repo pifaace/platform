@@ -1,3 +1,11 @@
 piface_app_home:
     path:      /
     defaults:  { _controller: PifaceAppBundle:Home:index }
+
+piface_app_advert:
+    path:      /advert/list
+    defaults: { _controller: PifaceAppBundle:Advert:list }
+
+piface_app_advert_add:
+    path:      /advert/add
+    defaults: { _controller: PifaceAppBundle:Advert:add }
