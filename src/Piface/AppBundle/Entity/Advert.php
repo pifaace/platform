@@ -3,11 +3,12 @@
 namespace Piface\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Advert
  *
- * @ORM\Table(name="advert")
+ * @ORM\Table(name="platform_advert")
  * @ORM\Entity(repositoryClass="Piface\AppBundle\Repository\AdvertRepository")
  */
 class Advert
@@ -24,12 +25,19 @@ class Advert
     /**
      * @var string
      *
+     * @Assert\NotBlank()
+     *
      * @ORM\Column(name="title", type="string", length=255)
      */
     protected $title;
 
     /**
      * @var string
+     *
+     * @Assert\NotBlank()
+     * @Assert\Length(
+     *     min = 20
+     * )
      *
      * @ORM\Column(name="content", type="text")
      */
@@ -55,6 +63,11 @@ class Advert
      */
     private $user;
 
+
+    public function __construct()
+    {
+        $this->date = new \DateTime();
+    }
 
     /**
      * Get id
