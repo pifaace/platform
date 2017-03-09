@@ -2,9 +2,9 @@
 
 {% block page_content %}
     Liste de mes annonces :
-    
+
     {% for advert in adverts %}
         <p><a href="{{ path('piface_app_my_advert', {'id': advert.id}) }}">{{ advert.title }}</a></p>
     {% endfor %}
-    
+
 {% endblock %}

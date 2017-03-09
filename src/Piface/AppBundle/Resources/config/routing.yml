@@ -3,12 +3,12 @@ piface_app_home:
     defaults:  { _controller: PifaceAppBundle:Home:index }
 
 piface_app_advert_list:
-    path:      /advert/list
+    path:      /adverts
     defaults: { _controller: PifaceAppBundle:Advert:list }
 
 piface_app_advert_add:
     path:      /advert/add
-    defaults: { _controller: PifaceAppBundle:Advert:add }
+    defaults: { _controller: PifaceAppBundle:UserAdvert:addAdvert }
 
 piface_app_advert:
     path:      /advert/{id}
@@ -17,9 +17,9 @@ piface_app_advert:
 
 #Espace personnel user
 piface_app_my_advert_list:
-    path:     /perso-advert/list
+    path:     /account/adverts
     defaults: { _controller: PifaceAppBundle:UserAdvert:myAdvertList }
 
 piface_app_my_advert:
-    path:     /perso-advert/advert/{id}
+    path:     /account/advert/{id}
     defaults: { _controller: PifaceAppBundle:UserAdvert:myAdvertShow }

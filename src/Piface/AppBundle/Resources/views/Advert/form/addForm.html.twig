@@ -1,12 +1,12 @@
 <div class="well">
-    {{ form_start(form) }}
+    {{ form_start(form, {'attr': {'id':'addAdvertForm'}}) }}
     {{ form_errors(form) }}
 
     {{ form_label(form.title) }}
     {{ form_errors(form.title) }}
     {{ form_widget(form.title) }}
 
-    <button type="submit">Publier mon annonce</button>
+    <button id="addAdvert" type="submit">Publier mon annonce</button>
 
     {{ form_rest(form) }}
     {{ form_end(form) }}
