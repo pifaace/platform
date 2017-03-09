@@ -9,50 +9,31 @@
 namespace Piface\AppBundle\Controller;
 
 
-use Piface\AppBundle\Entity\Advert;
-use Piface\AppBundle\Form\AdvertType;
-use Symfony\Component\HttpFoundation\Request;
-
 class AdvertController extends BaseController
 {
-    public function showAction()
+    public function showAction($id)
     {
+        $advertManager = $this->get('app.advert.manager');
+        $advert = $advertManager->getRepository()->find($id);
 
+        if (null == $advert) {
+            throw $this->createNotFoundException('L\'annonce ' . $id . ' n\'existe pas');
+        }
+
+        return $this->render('PifaceAppBundle:Advert:showAdvert.html.twig', array(
+            'advert' => $advert
+        ));
     }
 
     public function listAction()
     {
-        return $this->render('PifaceAppBundle:Advert:listAdvert.html.twig');
-    }
-
-    public function editAction($id)
-    {
-
-    }
-
-    public function addAction(Request $request)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $advert = new Advert;
-        $form = $this->createForm(new AdvertType(), $advert);
-
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $user = $this->getUser();
-            $advert->setAuthor($user->getName());
-            $user->addAdvert($advert);
-
-            $em->persist($advert);
-
-            $em->flush();
-
-            return $this->redirectToRoute('piface_app_home');
-        }
-
-        return $this->render('PifaceAppBundle:Advert:addAdvert.html.twig', array(
-            'form' => $form->createView()
+        $advertManager = $this->get('app.advert.manager');
+        $adverts = $advertManager->getRepository()->findAll();
+        return $this->render('PifaceAppBundle:Advert:listAdvert.html.twig', array(
+            'adverts' => $adverts
         ));
     }
+
 
     public function deleteAction()
     {

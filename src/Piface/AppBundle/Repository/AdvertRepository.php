@@ -2,6 +2,7 @@
 
 namespace Piface\AppBundle\Repository;
 
+use Doctrine\DBAL\Query\QueryBuilder;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -22,4 +23,14 @@ class AdvertRepository extends EntityRepository
 
         return $qb->getQuery()->getResult();
     }
+
+//    public function isAuthorized($advertId, $advertIdList)
+//    {
+//        $qb = $this->createQueryBuilder('a');
+//
+//        $qb
+//            ->
+//
+//
+//    }
 }

@@ -3,6 +3,9 @@
 namespace Piface\AppBundle\Controller;
 
 use Piface\AppBundle\Controller\BaseController;
+use Piface\AppBundle\Entity\Advert;
+use Piface\AppBundle\Form\AdvertType;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Created by PhpStorm.
@@ -26,14 +29,49 @@ class UserAdvertController extends BaseController
     {
         $advertManager = $this->get('app.advert.manager');
         $advert = $advertManager->getRepository()->find($id);
+        $userAdvertId = [];
 
         if (null == $advert) {
-            throw $this->createNotFoundException('L\'annonce ' .$id. ' n\'existe pas');
+            throw $this->createNotFoundException('L\'annonce ' . $id . ' n\'existe pas');
         }
 
+        $advertList = $this->getUser()->getAdverts();
+
+        foreach ($advertList as $advertId) {
+            $userAdvertId[] = $advertId->getId();
+        }
+        $match = in_array($id, $userAdvertId);
+
+        if ($match == false) {
+            throw $this->createNotFoundException('Cette annonce n\'existe pas');
+        }
 
         return $this->render('PifaceAppBundle:Advert/User:myAdvertShow.html.twig', array(
             'advert' => $advert
+        ));
+    }
+
+    public function addAdvertAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $advert = new Advert;
+        $form = $this->createForm(new AdvertType(), $advert);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $user = $this->getUser();
+            $advert->setAuthor($user->getName());
+            $user->addAdvert($advert);
+
+            $em->persist($advert);
+
+            $em->flush();
+
+            return $this->redirectToRoute('piface_app_home');
+        }
+
+        return $this->render('PifaceAppBundle:Advert:addAdvert.html.twig', array(
+            'form' => $form->createView()
         ));
     }
 }
