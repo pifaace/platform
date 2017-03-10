@@ -23,14 +23,4 @@ class AdvertRepository extends EntityRepository
 
         return $qb->getQuery()->getResult();
     }
-
-//    public function isAuthorized($advertId, $advertIdList)
-//    {
-//        $qb = $this->createQueryBuilder('a');
-//
-//        $qb
-//            ->
-//
-//
-//    }
 }
