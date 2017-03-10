@@ -1,0 +1,11 @@
+parameters:
+    #-- base
+    app.base.manager.class: Piface\AppBundle\Manager\Base\BaseManager
+
+services:
+    # -- base manager
+        app.base.manager:
+            abstract: true
+            class: %app.base.manager.class%
+            arguments:
+                - "@doctrine.orm.entity_manager"

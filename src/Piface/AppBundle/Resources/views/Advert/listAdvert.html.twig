@@ -1,0 +1,8 @@
+{% extends 'PifaceAppBundle:Base:base.html.twig' %}
+
+{% block page_content %}
+    Liste des annonces :<br>
+    {% for advert in adverts %}
+        <a href="{{ path('piface_app_advert', {'id': advert.id}) }}">{{ advert.title }}</a><br>
+    {% endfor %}
+{% endblock %}
