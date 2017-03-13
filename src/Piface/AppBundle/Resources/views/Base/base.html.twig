@@ -1,0 +1,20 @@
+{% extends 'PifaceAppBundle:Base:root.html.twig' %}
+
+{% block container %}
+
+    <div class="page">
+        {% block page %}
+            <div class="page-main">
+                {% block page_main %}
+                    <div class="page-content">
+                        <h3>{{ title }}</h3>
+                        <hr>
+                        {% block page_content %}
+
+                        {% endblock %}
+                    </div>
+                {% endblock %}
+            </div>
+        {% endblock %}
+    </div>
+{% endblock %}

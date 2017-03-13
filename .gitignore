@@ -10,3 +10,10 @@
 /vendor/
 /bin/
 /composer.phar
+.idea/workspace.xml
+composer.lock
+.php_cs.cache
+
+#Assets
+web/css/
+web/js/
