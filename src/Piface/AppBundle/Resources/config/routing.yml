@@ -8,7 +8,7 @@ piface_app_advert_list:
 
 piface_app_advert_add:
     path:      /advert/add
-    defaults: { _controller: PifaceAppBundle:UserAdvert:addAdvert }
+    defaults: { _controller: PifaceAppBundle:UserAdvert:add }
 
 piface_app_advert:
     path:      /advert/{id}
@@ -18,8 +18,8 @@ piface_app_advert:
 #Espace personnel user
 piface_app_my_advert_list:
     path:     /account/adverts
-    defaults: { _controller: PifaceAppBundle:UserAdvert:myAdvertList }
+    defaults: { _controller: PifaceAppBundle:UserAdvert:list }
 
 piface_app_my_advert:
     path:     /account/advert/{id}
-    defaults: { _controller: PifaceAppBundle:UserAdvert:myAdvertShow }
+    defaults: { _controller: PifaceAppBundle:UserAdvert:show }
