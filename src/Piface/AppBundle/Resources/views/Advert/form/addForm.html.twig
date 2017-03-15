@@ -1,13 +1,39 @@
-<div class="well">
-    {{ form_start(form, {'attr': {'id':'addAdvertForm'}}) }}
-    {{ form_errors(form) }}
+<div class="panel panel-primary">
+    <div class="panel-heading">Votre annonce</div>
+    <div class="panel-body">
+        {{ form_start(form, {'attr': {'id':'addAdvertForm'}}) }}
+        {{ form_errors(form) }}
 
-    {{ form_label(form.title) }}
-    {{ form_errors(form.title) }}
-    {{ form_widget(form.title) }}
+        <div class="form-group">
+            {{ form_label(form.category) }}
+            {{ form_errors(form.category) }}
+            {{ form_widget(form.category, {'attr': {'class': 'form-control small'}}) }}
+        </div>
 
-    <button id="addAdvert" type="submit">Publier mon annonce</button>
+        <div class="form-group">
+            {{ form_label(form.title) }}
+            {{ form_errors(form.title) }}
+            {{ form_widget(form.title, {'attr': {'class': 'form-control medium'}}) }}
+        </div>
 
-    {{ form_rest(form) }}
-    {{ form_end(form) }}
+        <div class="form-group">
+            {{ form_label(form.content) }}
+            {{ form_errors(form.content) }}
+            {{ form_widget(form.content, {'attr': {'class': 'form-control medium', 'rows': '10'}}) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_label(form.prix) }}
+            <div class="input-group small">
+                {{ form_errors(form.prix) }}
+                {{ form_widget(form.prix, {'attr': {'class': 'form-control', 'aria-describedby': 'prix-addon', 'maxlength': '8'}}) }}
+                <span class="input-group-addon" id="prix-addon">€</span>
+            </div>
+        </div>
+
+        <button id="addAdvert" type="submit" class="btn btn-primary">Publier mon annonce</button>
+
+        {{ form_rest(form) }}
+        {{ form_end(form) }}
+    </div>
 </div>

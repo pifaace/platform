@@ -58,11 +58,27 @@ class Advert
     protected $date;
 
     /**
+     * @var integer
+     *
+     * @Assert\NotBlank()
+     *
+     * @ORM\Column(name="prix", type="integer")
+     */
+    protected $prix;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Piface\UserBundle\Entity\User", inversedBy="adverts")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
 
+    /**
+     * @Assert\NotBlank()
+     *
+     * @ORM\ManyToOne(targetEntity="Piface\AppBundle\Entity\Category", inversedBy="adverts")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $category;
 
     public function __construct()
     {
@@ -72,7 +88,7 @@ class Advert
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -95,7 +111,7 @@ class Advert
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -118,7 +134,7 @@ class Advert
     /**
      * Get content
      *
-     * @return string 
+     * @return string
      */
     public function getContent()
     {
@@ -141,7 +157,7 @@ class Advert
     /**
      * Get author
      *
-     * @return string 
+     * @return string
      */
     public function getAuthor()
     {
@@ -164,7 +180,7 @@ class Advert
     /**
      * Get date
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDate()
     {
@@ -185,5 +201,38 @@ class Advert
     public function setUser($user)
     {
         $this->user = $user;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * @param mixed $category
+     */
+    public function setCategory($category)
+    {
+        $this->category = $category;
+        $category->addAdvert($this);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPrix()
+    {
+        return $this->prix;
+    }
+
+    /**
+     * @param mixed $prix
+     */
+    public function setPrix($prix)
+    {
+        $this->prix = $prix;
     }
 }

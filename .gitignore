@@ -10,7 +10,7 @@
 /vendor/
 /bin/
 /composer.phar
-.idea/workspace.xml
+.idea/*
 composer.lock
 .php_cs.cache
 

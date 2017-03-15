@@ -1,14 +1,7 @@
 imports:
     - { resource: manager.yml }
 
-parameters:
-    #-- base
-    app.base.manager.class: Piface\AppBundle\Manager\Base\BaseManager
-
 services:
-    app.advert.manager:
-        class: Piface\AppBundle\Manager\AdvertManager
-        parent: app.base.manager
-        tags:
-            - { name: app.manager }
+    platform.access_advert:
+        class: Piface\AppBundle\Services\accessAdvert
 

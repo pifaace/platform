@@ -15,43 +15,35 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class UserAdvertController extends BaseController
 {
-    public function myAdvertListAction()
+    public function listAction()
     {
         $advertManager = $this->get('app.advert.manager');
         $adverts = $advertManager->getMyListAdvert($this->getUser()->getId());
 
-        return $this->render('PifaceAppBundle:Advert/User:myListAdvert.html.twig', array(
+        return $this->render('PifaceAppBundle:Advert/User:listAdvert.html.twig', array(
             'adverts' => $adverts
         ));
     }
 
-    public function myAdvertShowAction($id)
+    public function showAction($id)
     {
         $advertManager = $this->get('app.advert.manager');
         $advert = $advertManager->getRepository()->find($id);
-        $userAdvertId = [];
+        $advertList = $this->getUser()->getAdverts();
 
         if (null == $advert) {
             throw $this->createNotFoundException('L\'annonce ' . $id . ' n\'existe pas');
         }
 
-        $advertList = $this->getUser()->getAdverts();
+        $accessAdvert = $this->get('platform.access_advert');
+        $accessAdvert->isAuthorized($id, $advertList);
 
-        foreach ($advertList as $advertId) {
-            $userAdvertId[] = $advertId->getId();
-        }
-        $match = in_array($id, $userAdvertId);
-
-        if ($match == false) {
-            throw $this->createNotFoundException('Cette annonce n\'existe pas');
-        }
-
-        return $this->render('PifaceAppBundle:Advert/User:myAdvertShow.html.twig', array(
+        return $this->render('PifaceAppBundle:Advert/User:showAdvert.html.twig', array(
             'advert' => $advert
         ));
     }
 
-    public function addAdvertAction(Request $request)
+    public function addAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
         $advert = new Advert;
@@ -64,13 +56,12 @@ class UserAdvertController extends BaseController
             $user->addAdvert($advert);
 
             $em->persist($advert);
-
             $em->flush();
 
             return $this->redirectToRoute('piface_app_home');
         }
 
-        return $this->render('PifaceAppBundle:Advert:addAdvert.html.twig', array(
+        return $this->render('PifaceAppBundle:Advert/User:addAdvert.html.twig', array(
             'form' => $form->createView()
         ));
     }

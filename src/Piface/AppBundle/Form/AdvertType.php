@@ -14,11 +14,22 @@ class AdvertType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('category', 'entity', array(
+                'label' => 'Categorie',
+                'class' => 'Piface\AppBundle\Entity\Category',
+                'placeholder' => 'Choisissez une catégorie',
+                'property' => 'name',
+                'multiple' => false,
+                'expanded' => false
+            ))
             ->add('title', 'text', array(
                 'label' => 'Titre'
             ))
             ->add('content', 'textarea', array(
                 'label' => 'Contenu'
+            ))
+            ->add('prix', 'text', array(
+                'label' => 'Prix'
             ));
     }
 

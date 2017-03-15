@@ -33,10 +33,4 @@ class AdvertController extends BaseController
             'adverts' => $adverts
         ));
     }
-
-
-    public function deleteAction()
-    {
-
-    }
 }
