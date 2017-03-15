@@ -1,0 +1,7 @@
+services:
+    advert.handler.form:
+        class: Piface\AppBundle\Form\Handler\AdvertHandler
+        scope: request
+        arguments:
+         - '@request'
+         - '@doctrine.orm.entity_manager'

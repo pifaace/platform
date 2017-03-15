@@ -43,21 +43,17 @@ class UserAdvertController extends BaseController
         ));
     }
 
-    public function addAction(Request $request)
+    public function addAction()
     {
-        $em = $this->getDoctrine()->getManager();
         $advert = new Advert;
         $form = $this->createForm(new AdvertType(), $advert);
 
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $user = $this->getUser();
-            $advert->setAuthor($user->getName());
-            $user->addAdvert($advert);
+        $advertHandler = $this->get('advert.handler.form');
+        $advertHandler->setUser($this->getUser());
+        $advertHandler->setAdvert($advert);
+        $advertHandler->setForm($form);
 
-            $em->persist($advert);
-            $em->flush();
-
+        if ($advertHandler->process()) {
             return $this->redirectToRoute('piface_app_home');
         }
 
