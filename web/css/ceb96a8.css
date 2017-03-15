@@ -1,6 +1,11 @@
-html, body {
+/** ELEMENTS DE BASE **/
+html, body, form {
     margin: 0;
     padding: 0;
+}
+
+#wrap {
+    background: #F2F2F1;
 }
 
 #container {
@@ -8,8 +13,8 @@ html, body {
     margin: auto;
 }
 
-#header {
-
+textarea {
+    resize: none;
 }
 
 /*!
