@@ -2,7 +2,4 @@ imports:
     - { resource: manager.yml }
     - { resource: handler.yml }
 
-services:
-    platform.access_advert:
-        class: Piface\AppBundle\Services\accessAdvert
 

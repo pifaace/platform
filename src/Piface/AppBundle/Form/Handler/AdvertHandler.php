@@ -83,7 +83,7 @@ class AdvertHandler
             if ($this->form->isValid()) {
                 $this->advert = $this->form->getData();
                 $this->advert->setAuthor($this->user->getName());
-                $this->user->addAdvert($this->advert);
+                $this->advert->setUser($this->user);
                 $this->onSuccess($this->advert);
             }
             return true;

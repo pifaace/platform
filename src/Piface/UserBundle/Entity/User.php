@@ -55,17 +55,6 @@ class User extends BaseUser
     protected $sexe;
 
     /**
-     * @ORM\OneToMany(targetEntity="Piface\AppBundle\Entity\Advert", mappedBy="user")
-     */
-    protected $adverts;
-
-    public function __construct()
-    {
-        parent::__construct();
-        $this->adverts = new ArrayCollection();
-    }
-
-    /**
      * Get id
      *
      * @return integer
@@ -137,39 +126,5 @@ class User extends BaseUser
     public function setSexe($sexe)
     {
         $this->sexe = $sexe;
-    }
-
-    /**
-     * Add adverts
-     *
-     * @param Advert $adverts
-     * @return User
-     */
-    public function addAdvert(Advert $adverts)
-    {
-        $this->adverts[] = $adverts;
-        $adverts->setUser($this);
-
-        return $this;
-    }
-
-    /**
-     * Remove adverts
-     *
-     * @param Advert $adverts
-     */
-    public function removeAdvert(Advert $adverts)
-    {
-        $this->adverts->removeElement($adverts);
-    }
-
-    /**
-     * Get adverts
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getAdverts()
-    {
-        return $this->adverts;
     }
 }

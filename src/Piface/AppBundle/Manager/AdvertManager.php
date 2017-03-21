@@ -31,4 +31,9 @@ class AdvertManager extends BaseManager
     {
         return $this->getRepository()->getMyListAdvert($id);
     }
+
+    public function isAuthorized($id)
+    {
+        return $this->getRepository()->isAuthorized($id);
+    }
 }

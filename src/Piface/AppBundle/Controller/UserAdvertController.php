@@ -6,6 +6,7 @@ use Piface\AppBundle\Controller\BaseController;
 use Piface\AppBundle\Entity\Advert;
 use Piface\AppBundle\Form\AdvertType;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Created by PhpStorm.
@@ -29,14 +30,16 @@ class UserAdvertController extends BaseController
     {
         $advertManager = $this->get('app.advert.manager');
         $advert = $advertManager->getRepository()->find($id);
-        $advertList = $this->getUser()->getAdverts();
+        $userId = $this->getUser()->getId();
 
         if (null == $advert) {
             throw $this->createNotFoundException('L\'annonce ' . $id . ' n\'existe pas');
         }
+        $matchAdvert = $advertManager->isAuthorized($id);
 
-        $accessAdvert = $this->get('platform.access_advert');
-        $accessAdvert->isAuthorized($id, $advertList);
+        if ($matchAdvert['id'] != $userId) {
+            throw new NotFoundHttpException('Cette annonce n\'existe ');
+        }
 
         return $this->render('PifaceAppBundle:Advert/User:showAdvert.html.twig', array(
             'advert' => $advert

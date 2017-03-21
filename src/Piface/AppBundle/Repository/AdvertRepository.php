@@ -23,4 +23,17 @@ class AdvertRepository extends EntityRepository
 
         return $qb->getQuery()->getResult();
     }
+
+    public function isAuthorized($id)
+    {
+        $qb = $this->createQueryBuilder('a');
+
+        $qb
+            ->leftJoin('a.user', 'user')
+            ->select('user.id')
+            ->where('a.id = :id')
+            ->setParameter(':id', $id);
+
+        return $qb->getQuery()->getOneOrNullResult();
+    }
 }

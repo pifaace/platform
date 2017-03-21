@@ -67,7 +67,7 @@ class Advert
     protected $prix;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Piface\UserBundle\Entity\User", inversedBy="adverts")
+     * @ORM\ManyToOne(targetEntity="Piface\UserBundle\Entity\User")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
