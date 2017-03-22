@@ -80,6 +80,12 @@ class Advert
      */
     private $category;
 
+    /**
+     * @ORM\OneToOne(targetEntity="Piface\AppBundle\Entity\Image", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $image;
+
     public function __construct()
     {
         $this->date = new \DateTime();
@@ -234,5 +240,21 @@ class Advert
     public function setPrix($prix)
     {
         $this->prix = $prix;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param mixed $image
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
     }
 }
