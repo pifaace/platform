@@ -6,29 +6,35 @@
 
         <div class="form-group">
             {{ form_label(form.category) }}
-            {{ form_errors(form.category) }}
             {{ form_widget(form.category, {'attr': {'class': 'form-control small'}}) }}
+            {{ form_errors(form.category) }}
         </div>
 
         <div class="form-group">
             {{ form_label(form.title) }}
-            {{ form_errors(form.title) }}
             {{ form_widget(form.title, {'attr': {'class': 'form-control medium'}}) }}
+            {{ form_errors(form.title, {'attr': {'class': 'error-form'}}) }}
         </div>
 
         <div class="form-group">
             {{ form_label(form.content) }}
-            {{ form_errors(form.content) }}
             {{ form_widget(form.content, {'attr': {'class': 'form-control medium', 'rows': '10'}}) }}
+            {{ form_errors(form.content) }}
         </div>
 
         <div class="form-group">
             {{ form_label(form.prix) }}
             <div class="input-group small">
-                {{ form_errors(form.prix) }}
                 {{ form_widget(form.prix, {'attr': {'class': 'form-control', 'aria-describedby': 'prix-addon', 'maxlength': '8'}}) }}
                 <span class="input-group-addon" id="prix-addon">€</span>
             </div>
+            {{ form_errors(form.prix) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_label(form.image) }}
+            {{ form_widget(form.image) }}
+            {{ form_errors(form.image) }}
         </div>
 
         <button id="addAdvert" type="submit" class="btn btn-primary">Publier mon annonce</button>
