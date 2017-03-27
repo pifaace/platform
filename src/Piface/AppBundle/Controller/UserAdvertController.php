@@ -46,7 +46,7 @@ class UserAdvertController extends BaseController
         ));
     }
 
-    public function addAction()
+    public function addAction(Request $request)
     {
         $advert = new Advert;
         $form = $this->createForm(new AdvertType(), $advert);
@@ -57,7 +57,7 @@ class UserAdvertController extends BaseController
         $advertHandler->setForm($form);
 
         if ($advertHandler->process()) {
-            return $this->redirectToRoute('piface_app_home');
+            return $this->redirectToRoute('piface_app_advert', array('id' => $advert->getId()));
         }
 
         return $this->render('PifaceAppBundle:Advert/User:addAdvert.html.twig', array(

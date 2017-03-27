@@ -32,7 +32,8 @@ class AdvertType extends AbstractType
                 'label' => 'Prix'
             ))
             ->add('image', new ImageType(), array(
-                'label' => false
+                'label' => false,
+                'required' => false
             ));
     }
 

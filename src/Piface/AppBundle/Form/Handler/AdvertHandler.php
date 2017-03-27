@@ -85,8 +85,8 @@ class AdvertHandler
                 $this->advert->setAuthor($this->user->getName());
                 $this->advert->setUser($this->user);
                 $this->onSuccess($this->advert);
+                return true;
             }
-            return true;
         }
         return false;
     }

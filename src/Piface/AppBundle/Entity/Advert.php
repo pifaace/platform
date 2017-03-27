@@ -81,8 +81,9 @@ class Advert
     private $category;
 
     /**
-     * @ORM\OneToOne(targetEntity="Piface\AppBundle\Entity\Image", cascade={"persist"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\OneToOne(targetEntity="Piface\AppBundle\Entity\Image", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=true)
+     *
      */
     private $image;
 

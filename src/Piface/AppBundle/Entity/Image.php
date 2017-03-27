@@ -4,12 +4,13 @@ namespace Piface\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * Image
  *
- * @ORM\Table(name="image")
+ * @ORM\Table(name="platform_image")
  * @ORM\Entity(repositoryClass="Piface\AppBundle\Repository\ImageRepository")
  * @Vich\Uploadable
  *
@@ -26,16 +27,15 @@ class Image
     private $id;
 
     /**
-     * @Vich\UploadableField(mapping="product_image", fileNameProperty="imageName")
-     *
+     * @Vich\UploadableField(mapping="advert_image", fileNameProperty="imageName")
      * @var File
      */
     private $imageFile;
 
     /**
      * @ORM\Column(type="string", length=255)
-     *
      * @var string
+     *
      */
     private $imageName;
 
