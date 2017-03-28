@@ -75,15 +75,17 @@ class AdvertHandler
         $this->advert = $advert;
     }
 
-    public function process()
+    public function process($mode)
     {
         if ('POST' == $this->request->getMethod()) {
             $this->form->handleRequest($this->request);
 
-            if ($this->form->isValid()) {
+            if ($this->form->isSubmitted() && $this->form->isValid()) {
                 $this->advert = $this->form->getData();
-                $this->advert->setAuthor($this->user->getName());
-                $this->advert->setUser($this->user);
+                if ('create' == $mode) {
+                    $this->advert->setAuthor($this->user->getName());
+                    $this->advert->setUser($this->user);
+                }
                 $this->onSuccess($this->advert);
                 return true;
             }
@@ -96,5 +98,23 @@ class AdvertHandler
         $this->manager->persist($advert);
         $this->manager->flush();
         return true;
+    }
+
+    public function delete(Advert $advert)
+    {
+        if ('POST' == $this->request->getMethod()) {
+            $this->form->handleRequest($this->request);
+            if ($this->form->isSubmitted() && $this->form->isValid()) {
+                try {
+                    $this->manager->remove($advert);
+                    $this->manager->flush();
+
+                    return true;
+                } catch (\Exception $e) {
+                    error_log($e->getMessage());
+                }
+            }
+        }
+        return false;
     }
 }

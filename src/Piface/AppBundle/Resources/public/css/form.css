@@ -6,3 +6,22 @@
 .small {
     width: 30%;
 }
+
+/** ERREUR DANS UN FORMULAIRE **/
+div.form-group ul {
+    font-size: 11px;
+    list-style: none;
+    color: #FB0104;
+    margin: 0;
+    padding: 0;
+}
+
+span.label-error {
+    color: #FB0104;
+    display: none;
+}
+
+span.visible {
+    display: block !important;
+}
+

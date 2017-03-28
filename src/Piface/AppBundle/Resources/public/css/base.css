@@ -8,14 +8,6 @@ textarea {
     resize: none;
 }
 
-div.form-group ul {
-    font-size: 11px;
-    list-style: none;
-    color: #FB0104;
-    margin: 0;
-    padding: 0;
-}
-
 #wrap {
     background: #F2F2F1;
 }
