@@ -1,0 +1,18 @@
+{% extends 'PifaceAppBundle:Base:base.html.twig' %}
+
+{% block page_content %}
+    Attention, vous êtes sur le point de supprimer cette annonce.<br>
+    Pour rappel, une fois l'annonce supprimée, vous ne pourrez plus y accèder.<br>
+
+    Recopiez le mot "SUPPRIMER" pour valider la suppression
+
+    <form id="delete-advert-form" class="form-submit" action="{{ path('piface_app_my_advert_delete', {'id':advert.id}) }}" method="post">
+        <input id="word-confirmation" type="text" placeholder="SUPPRIMER"><br>
+        <span class="label-error">Le mot entré ne correspond pas</span>
+
+        <button id="delete-advert" type="submit">Valider la suppression</button>
+        {{ form_rest(form) }}
+    </form>
+    <a href="{{ path('piface_app_my_advert', {'id':advert.id}) }}" class="btn btn-default">Retour</a>
+
+{% endblock %}

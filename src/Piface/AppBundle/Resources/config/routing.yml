@@ -23,3 +23,11 @@ piface_app_my_advert_list:
 piface_app_my_advert:
     path:     /account/advert/{id}
     defaults: { _controller: PifaceAppBundle:UserAdvert:show }
+
+piface_app_my_advert_delete:
+    path:    /account/delete/{id}
+    defaults: { _controller: PifaceAppBundle:UserAdvert:delete }
+
+piface_app_my_advert_edit:
+    path:    /account/advert/edit/{id}
+    defaults: { _controller: PifaceAppBundle:UserAdvert:edit }

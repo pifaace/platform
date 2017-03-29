@@ -1,7 +1,7 @@
 <div class="panel panel-primary">
     <div class="panel-heading">Votre annonce</div>
     <div class="panel-body">
-        {{ form_start(form, {'attr': {'id':'addAdvertForm'}}) }}
+        {{ form_start(form, {'attr': {'id':'addAdvertForm', 'class': 'form-submit'}}) }}
         {{ form_errors(form) }}
 
         <div class="form-group">
@@ -37,7 +37,7 @@
             {{ form_errors(form.image) }}
         </div>
 
-        <button id="addAdvert" type="submit" class="btn btn-primary">Publier mon annonce</button>
+        <button id="addAdvert" type="submit" class="btn-anti-spam btn btn-primary">Publier mon annonce</button>
 
         {{ form_rest(form) }}
         {{ form_end(form) }}

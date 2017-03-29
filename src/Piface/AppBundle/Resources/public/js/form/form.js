@@ -2,11 +2,12 @@ $(function () {
 
     var isSubmitted = false;
 
-    $('#addAdvert').click(function (event) {
+    $('.btn-anti-spam').click(function (event) {
         event.preventDefault();
         if (isSubmitted == false) {
+            console.log(isSubmitted);
             isSubmitted = true;
-            $('#addAdvertForm').submit();
+            $('.form-submit').submit();
         }
     })
 });
