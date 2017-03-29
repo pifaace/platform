@@ -6,7 +6,6 @@ use Piface\AppBundle\Controller\BaseController;
 use Piface\AppBundle\Entity\Advert;
 use Piface\AppBundle\Form\AdvertType;
 use Piface\AppBundle\Form\EditAdvertType;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
@@ -31,23 +30,15 @@ class UserAdvertController extends BaseController
     {
         $advertManager = $this->get('app.advert.manager');
         $advert = $advertManager->getRepository()->find($id);
-        $userId = $this->getUser()->getId();
 
-        if (null == $advert) {
-            throw $this->createNotFoundException('L\'annonce ' . $id . ' n\'existe pas');
-        }
-        $matchAdvert = $advertManager->isAuthorized($id);
-
-        if ($matchAdvert['id'] != $userId) {
-            throw new NotFoundHttpException('Cette annonce n\'existe pas');
-        }
+        $this->controleAccess($advertManager, $advert, $id);
 
         return $this->render('PifaceAppBundle:Advert/User:showAdvert.html.twig', array(
             'advert' => $advert
         ));
     }
 
-    public function addAction(Request $request)
+    public function addAction()
     {
         $advert = new Advert;
         $form = $this->createForm(new AdvertType(), $advert);
@@ -66,20 +57,12 @@ class UserAdvertController extends BaseController
         ));
     }
 
-    public function editAction($id, Request $request)
+    public function editAction($id)
     {
         $advertManager = $this->get('app.advert.manager');
         $advert = $advertManager->getRepository()->find($id);
-        $userId = $this->getUser()->getId();
 
-        if (null == $advert) {
-            throw $this->createNotFoundException('L\'annonce ' . $id . ' n\'existe pas');
-        }
-        $matchAdvert = $advertManager->isAuthorized($id);
-
-        if ($matchAdvert['id'] != $userId) {
-            throw new NotFoundHttpException('Cette annonce n\'existe pas');
-        }
+        $this->controleAccess($advertManager, $advert, $id);
 
         $editForm = $this->createForm(new EditAdvertType(), $advert);
 
@@ -96,20 +79,12 @@ class UserAdvertController extends BaseController
         ));
     }
 
-    public function deleteAction($id, Request $request)
+    public function deleteAction($id)
     {
         $advertManager = $this->get('app.advert.manager');
         $advert = $advertManager->getRepository()->find($id);
-        $userId = $this->getUser()->getId();
 
-        if (null == $advert) {
-            throw $this->createNotFoundException('L\'annonce ' . $id . ' n\'existe pas');
-        }
-        $matchAdvert = $advertManager->isAuthorized($id);
-
-        if ($matchAdvert['id'] != $userId) {
-            throw new NotFoundHttpException('Cette annonce n\'existe pas');
-        }
+        $this->controleAccess($advertManager, $advert, $id);
 
         $form = $this->createFormBuilder()->getForm();
         $advertHandler = $this->get('advert.handler.form');
@@ -124,4 +99,20 @@ class UserAdvertController extends BaseController
             'form' => $form->createView()
         ));
     }
+
+    private function controleAccess($advertManager, $advert, $id)
+    {
+        $userId = $this->getUser()->getId();
+
+        if (null == $advert) {
+            throw $this->createNotFoundException('L\'annonce ' . $id . ' n\'existe pas');
+        }
+        $matchAdvert = $advertManager->isAuthorized($id);
+
+        if ($matchAdvert['id'] != $userId) {
+            throw new NotFoundHttpException('Cette annonce n\'existe pas');
+        }
+
+    }
+
 }
