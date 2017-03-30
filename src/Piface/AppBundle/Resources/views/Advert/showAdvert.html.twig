@@ -6,7 +6,6 @@
     {% block advert %}
         <h2>{{ advert.title }}</h2>
         <i>Publiée le {{ advert.date|date('d/m/Y') }} à {{ advert.date|date('H:i:s') }}</i><br>
-
         {% if advert.image.imageFile is defined %}
             <img src="{{ asset(vich_uploader_asset(advert.image, 'imageFile')) }}" alt="{{ advert.image.imageName }}"/>
             <br>

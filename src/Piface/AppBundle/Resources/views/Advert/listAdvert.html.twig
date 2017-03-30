@@ -1,10 +1,50 @@
 {% extends 'PifaceAppBundle:Base:base.html.twig' %}
 
 {#{% set title = 'Les annonces' %}#}
-
+{% set number = 0 %}
+{% set currentDate = "now"|date('d/m/Y') %}
 {% block page_content %}
-    Liste des annonces :<br>
-    {% for advert in adverts %}
-        <a href="{{ path('piface_app_advert', {'id': advert.id}) }}">{{ advert.title }}</a><br>
-    {% endfor %}
+    <section>
+        <h4>LES ANNONCES</h4>
+        <section class="tab-content block-white">
+            <ul>
+                {% for advert in adverts %}
+                    {% set number = number + 1 %}
+                    <li class="border-b">
+                        <a href="{{ path('piface_app_advert', {'id': advert.id}) }}" class="list-item"
+                           data-info="{{ number }}">
+                            <div class="item-image">
+                                <span class="item_imagePic">
+                                    {% if advert.image.imageFile is defined %}
+                                        <img src="{{ asset(vich_uploader_asset(advert.image, 'imageFile') | imagine_filter('my_thumb')) }}"
+                                             alt="{{ advert.image.imageName }}">
+                                {% else %}
+                                        {% image '@PifaceAppBundle/Resources/public/images/no-image.png' %}
+                                        <img src="{{ asset_url | imagine_filter('my_thumb') }}"
+                                             alt="no-picture"/>
+                                        {% endimage %}
+                                    {% endif %}
+                                </span>
+                            </div>
+                            <section class="item-info">
+                                <h4 class="item-info-title">{{ advert.title }}</h4>
+                                <p>{{ advert.category.name }}</p>
+                                <h3 class="item-info-prix">{{ advert.prix }} €</h3>
+                                <aside class="item-absolute">
+                                    <p>
+                                        {% if currentDate ==  advert.date|date('d/m/Y') %}
+                                            Aujourd'hui
+                                        {% else %}
+                                            {{ advert.date|date('d/m/Y') }}
+                                        {% endif %}
+                                        à {{ advert.date|date('H:i:s') }}
+                                    </p>
+                                </aside>
+                            </section>
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </section>
+    </section>
 {% endblock %}
