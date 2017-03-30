@@ -1,9 +1,0 @@
-{% extends 'PifaceAppBundle:Advert:showAdvert.html.twig' %}
-
-{#{% set title = 'Annonce' %}#}
-
-{% block manage_advert %}
-    <br>
-    <a href="{{ path('piface_app_my_advert_edit', {'id':advert.id}) }}" class="btn btn-warning">Modifier l'annonce</a>
-    <a href="{{ path('piface_app_my_advert_delete', {'id': advert.id}) }}" class="btn btn-danger">Supprimer l'annonce</a>
-{% endblock %}

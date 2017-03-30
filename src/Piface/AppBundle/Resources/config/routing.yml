@@ -17,12 +17,8 @@ piface_app_advert:
 
 #Espace personnel user
 piface_app_my_advert_list:
-    path:     /account/adverts
+    path:     /account/adverts-save
     defaults: { _controller: PifaceAppBundle:UserAdvert:list }
-
-piface_app_my_advert:
-    path:     /account/advert/{id}
-    defaults: { _controller: PifaceAppBundle:UserAdvert:show }
 
 piface_app_my_advert_delete:
     path:    /account/delete/{id}
