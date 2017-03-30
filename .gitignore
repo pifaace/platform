@@ -18,3 +18,5 @@ composer.lock
 web/css/
 web/js/
 web/images/
+web/media/
+web/annonces/

@@ -8,11 +8,26 @@ textarea {
     resize: none;
 }
 
+ul {
+    margin: 0!important;
+    padding: 0;
+    list-style: none;
+}
+
+a {
+    text-decoration: none !important;
+}
+
 #wrap {
-    background: #F2F2F1;
+    background: #F8F8F8;
 }
 
 #container {
     width: 960px;
     margin: auto;
+}
+
+/** CLASSES DE BASE **/
+.block-white {
+    background-color: #fff;
 }

@@ -3,7 +3,7 @@ piface_app_home:
     defaults:  { _controller: PifaceAppBundle:Home:index }
 
 piface_app_advert_list:
-    path:      /adverts
+    path:      /adverts/offers
     defaults: { _controller: PifaceAppBundle:Advert:list }
 
 piface_app_advert_add:
@@ -11,7 +11,7 @@ piface_app_advert_add:
     defaults: { _controller: PifaceAppBundle:UserAdvert:add }
 
 piface_app_advert:
-    path:      /advert/{id}
+    path:      /advert/offer/{id}
     defaults: { _controller: PifaceAppBundle:Advert:show }
 
 

@@ -1,0 +1,66 @@
+/** MISE EN PAGE DES ANNONCES EN LIST **/
+
+section.tab-content {
+    border: 1px solid #B1B9BB;
+}
+
+li.border-b {
+    border-bottom: 1px solid #B1B9BB;
+}
+
+a.list-item {
+    position: relative;
+    display: block;
+    padding: 15px;
+    overflow: hidden;
+
+}
+
+a:hover.list-item {
+    background: #f2f2f2;
+    transition: background 0.2s;
+}
+
+li:last-child {
+    border-bottom: none;
+}
+
+ul li div.item-image {
+    position: relative;
+    float: left;
+    overflow: hidden;
+    min-width: 130px;
+    min-height: 120px;
+    max-height: 100%;
+    background: #f2f2f2;
+
+}
+
+span.item_imagePic {
+    display: block;
+    height: 100%;
+    min-height: 120px;
+    text-align: center;
+    line-height: 120px;
+}
+
+section.item-info {
+    position: relative;
+    float: left;
+    width: 85%;
+    padding: 0 0 0 10px;
+}
+
+section.item-info > .item-info-title {
+    color: #484848;
+}
+
+section.item-info > .item-info-prix {
+
+}
+
+section.item-info > .item-absolute {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}

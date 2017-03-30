@@ -88,9 +88,22 @@ vich_uploader:
 
     mappings:
         advert_image:
-            uri_prefix:         /images/annonce
-            upload_destination: '%kernel.root_dir%/../web/images/annonce'
+            uri_prefix:         /annonces/pictures
+            upload_destination: '%kernel.root_dir%/../web/annonces/pictures'
 
             inject_on_load:     false
             delete_on_update:   true
             delete_on_remove:   true
+
+# liipImagineBundle Configuration
+liip_imagine:
+    resolvers:
+        default:
+            web_path: ~
+    filter_sets:
+        cache: ~
+
+        my_thumb:
+            quality: 75
+            filters:
+                thumbnail: { size: [120, 90], mode: outbound }
