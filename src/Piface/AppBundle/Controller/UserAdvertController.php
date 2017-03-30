@@ -18,24 +18,8 @@ class UserAdvertController extends BaseController
 {
     public function listAction()
     {
-        $advertManager = $this->get('app.advert.manager');
-        $adverts = $advertManager->getMyListAdvert($this->getUser()->getId());
-
-        return $this->render('PifaceAppBundle:Advert/User:listAdvert.html.twig', array(
-            'adverts' => $adverts
-        ));
-    }
-
-    public function showAction($id)
-    {
-        $advertManager = $this->get('app.advert.manager');
-        $advert = $advertManager->getRepository()->find($id);
-
-        $this->controleAccess($advertManager, $advert, $id);
-
-        return $this->render('PifaceAppBundle:Advert/User:showAdvert.html.twig', array(
-            'advert' => $advert
-        ));
+        return $this->render('PifaceAppBundle:Advert/User:listAdvertSave.html.twig'
+        );
     }
 
     public function addAction()
