@@ -6,10 +6,6 @@ piface_app_advert_list:
     path:      /adverts/offers
     defaults: { _controller: PifaceAppBundle:Advert:list }
 
-piface_app_advert_add:
-    path:      /advert/add
-    defaults: { _controller: PifaceAppBundle:UserAdvert:add }
-
 piface_app_advert:
     path:      /advert/offer/{id}
     defaults: { _controller: PifaceAppBundle:Advert:show }
@@ -20,6 +16,10 @@ piface_app_my_advert_list:
     path:     /account/adverts-save
     defaults: { _controller: PifaceAppBundle:UserAdvert:list }
 
+piface_app_advert_add:
+    path:      /advert/add
+    defaults: { _controller: PifaceAppBundle:UserAdvert:add }
+
 piface_app_my_advert_delete:
     path:    /account/delete/{id}
     defaults: { _controller: PifaceAppBundle:UserAdvert:delete }
@@ -27,3 +27,7 @@ piface_app_my_advert_delete:
 piface_app_my_advert_edit:
     path:    /account/advert/edit/{id}
     defaults: { _controller: PifaceAppBundle:UserAdvert:edit }
+
+piface_app_dashboard:
+    path:    /account/dash-board
+    defaults: { _controller: PifaceAppBundle:Dashboard:show }

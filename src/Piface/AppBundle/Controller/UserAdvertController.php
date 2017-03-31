@@ -75,7 +75,7 @@ class UserAdvertController extends BaseController
         $advertHandler->setForm($form);
 
         if ($advertHandler->delete($advert)) {
-            return $this->redirectToRoute('piface_app_my_advert_list');
+            return $this->redirectToRoute('piface_app_dashboard');
         }
 
         return $this->render('PifaceAppBundle:Advert/User:deleteAdvert.html.twig', array(

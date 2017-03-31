@@ -13,7 +13,19 @@ use Doctrine\ORM\EntityRepository;
  */
 class AdvertRepository extends EntityRepository
 {
-    public function getMyListAdvert($id)
+    public function countAdvert($id)
+    {
+        $qb = $this->createQueryBuilder('a');
+
+        $qb
+            ->select('COUNT(a)')
+            ->where('a.user = :user')
+            ->setParameter(':user', $id);
+
+        return $qb->getQuery()->getSingleScalarResult();
+    }
+
+    public function getListAdvert($id)
     {
         $qb = $this->createQueryBuilder('a');
 
