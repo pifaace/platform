@@ -1,0 +1,51 @@
+/**CSS Action sur les annonces SUPPR/EDIT DANS DASHBOARD **/
+
+div.element {
+    background: #D6D6D6;
+    margin: 10px;
+    padding: 10px;
+    overflow: hidden;
+    display: flex;
+}
+
+div.date {
+    display: block;
+    float: left;
+    margin: auto;
+}
+
+div.image {
+    display: block;
+    float: left;
+    width: 250px;
+    overflow: hidden;
+    margin: auto;
+}
+
+div.detail {
+    display: block;
+    float: left;
+    margin: auto;
+}
+
+div.action {
+    background: #AEAEAE;
+    padding: 15px;
+    text-align: center;
+    line-height: 30px;
+}
+
+div.action a {
+    color: #fff;
+}
+
+div.action a:hover {
+    color: #1b809e;
+}
+
+div.action .hr {
+    height: 1px;
+    background: #E9EAEA;
+}
+
+

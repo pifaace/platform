@@ -33,7 +33,7 @@ class UserAdvertController extends BaseController
         $advertHandler->setForm($form);
 
         if ($advertHandler->process('create')) {
-            return $this->redirectToRoute('piface_app_my_advert', array('id' => $advert->getId()));
+            return $this->redirectToRoute('piface_app_advert', array('id' => $advert->getId()));
         }
 
         return $this->render('PifaceAppBundle:Advert/User:addAdvert.html.twig', array(
@@ -54,7 +54,7 @@ class UserAdvertController extends BaseController
         $advertHandler->setForm($editForm);
 
         if ($advertHandler->process('edit')) {
-            return $this->redirectToRoute('piface_app_my_advert', array('id' => $advert->getId()));
+            return $this->redirectToRoute('piface_app_advert', array('id' => $advert->getId()));
         }
 
         return $this->render('PifaceAppBundle:Advert/User:editAdvert.html.twig', array(
@@ -75,7 +75,7 @@ class UserAdvertController extends BaseController
         $advertHandler->setForm($form);
 
         if ($advertHandler->delete($advert)) {
-            return $this->redirectToRoute('piface_app_my_advert_list');
+            return $this->redirectToRoute('piface_app_dashboard');
         }
 
         return $this->render('PifaceAppBundle:Advert/User:deleteAdvert.html.twig', array(

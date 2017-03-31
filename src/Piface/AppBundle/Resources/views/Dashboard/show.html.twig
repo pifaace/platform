@@ -1,0 +1,55 @@
+{% extends "@PifaceApp/Base/base.html.twig" %}
+
+{% block title %}PifaceAppBundle:Dashboard:show{% endblock %}
+
+{% block page_content %}
+    {% set pluriel = (countAdvert <= 1) ? 'annonce' : 'annonces' %}
+    {% set count = 1 %}
+    <div class="dashboard-content block-white">
+
+        <h3>Mon tableau de bord</h3>
+
+            <a href="{{ path('piface_app_advert_add') }}">Déposer une annonce !</a>
+
+        <h4>{{ countAdvert }} {{ pluriel }} en ligne</h4>
+        <hr>
+
+        {% if adverts is not empty %}
+            {% for advert in adverts %}
+                <div class="element" id="element_{{ count }}">
+                    <div class="date">
+                        {{ advert.date|date('d/m/Y') }}
+                    </div>
+                    <div class="image">
+                        {% if advert.image.imageFile is defined %}
+                            <img src="{{ asset(vich_uploader_asset(advert.image, 'imageFile') | imagine_filter('my_thumb')) }}"
+                                 alt="{{ advert.image.imageName }}">
+                        {% endif %}
+                    </div>
+                    <div class="detail">
+                        <a href="{{ path('piface_app_advert', {'id':advert.id}) }}">{{ advert.title }}</a><br>
+                        {{ advert.category.name }}<br>
+                        {{ advert.prix }}€
+                    </div>
+                    <div class="action">
+                        {#<div class="edit">#}
+                        <a href="{{ path('piface_app_my_advert_edit', {'id': advert.id}) }}">MODIFIER</a>
+                        {#</div>#}
+                        <div class="hr"></div>
+                        {#<div class="delete">#}
+                        <a href="{{ path('piface_app_my_advert_delete', {'id': advert.id}) }}">SUPPRIMER</a>
+                        {#</div>#}
+                    </div>
+                </div>
+                {% set count = count + 1 %}
+            {% endfor %}
+        {% else %}
+            <h3>Les avantages du tableau de bord</h3>
+            <ul>
+                <li>Vision sur vos annonces en ligne</li>
+                <li>Possibiliter de modifier ou de supprimer vos annonces en quelques clic</li>
+            </ul>
+        {% endif %}
+
+    </div>
+{% endblock %}

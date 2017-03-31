@@ -2,6 +2,7 @@
 
 section.tab-content {
     border: 1px solid #B1B9BB;
+    width: 75%;
 }
 
 li.border-b {
@@ -47,7 +48,7 @@ span.item_imagePic {
 section.item-info {
     position: relative;
     float: left;
-    width: 85%;
+    width: 80%;
     padding: 0 0 0 10px;
 }
 

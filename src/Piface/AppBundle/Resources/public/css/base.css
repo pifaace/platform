@@ -9,7 +9,7 @@ textarea {
 }
 
 ul {
-    margin: 0!important;
+    margin: 0 !important;
     padding: 0;
     list-style: none;
 }
@@ -20,11 +20,19 @@ a {
 
 #wrap {
     background: #F8F8F8;
+    height: auto;
+    min-height: 100%;
+    position: relative;
 }
 
 #container {
-    width: 960px;
+    max-width: 1066px;
+    min-width: 320px;
     margin: auto;
+}
+
+.dashboard-content {
+    padding: 20px;
 }
 
 /** CLASSES DE BASE **/
