@@ -17,13 +17,14 @@
                 <li><a href="{{ path('piface_app_my_advert_list') }}">MES ANNONCES</a></li>
                 <li><a href="{{ path('piface_app_advert_add') }}">AJOUTER UNE ANNONCE</a></li>
                 <li class="dropdown">
-                    {#<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"#}
-                       {#aria-expanded="false">{{ app.user.username }}<span class="caret"></span></a>#}
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">{{ app.user.username|upper }}</a>
                     <ul class="dropdown-menu">
-                        <li><a href="{{ path('fos_user_profile_show') }}">MON PROFIL</a></li>
+                        <li><a href="#">Mon tableau de bord</a></li>
+                        <li><a href="{{ path('fos_user_profile_show') }}">Mon profil</a></li>
+                        <li><a href="{{ path('fos_user_security_logout') }}">Déconnexion</a></li>
                     </ul>
                 </li>
-                <li><a href="{{ path('fos_user_security_logout') }}">DECONNEXION</a></li>
             </ul>
         </div><!-- /.navbar-collapse -->
     </div>
