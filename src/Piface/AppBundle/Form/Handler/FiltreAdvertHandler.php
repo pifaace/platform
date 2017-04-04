@@ -11,6 +11,7 @@ namespace Piface\AppBundle\Form\Handler;
 
 use Doctrine\ORM\EntityManager;
 use Piface\AppBundle\Entity\Advert;
+use Piface\AppBundle\Manager\AdvertManager;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -29,12 +30,12 @@ class FiltreAdvertHandler
     /**
      * @var EntityManager
      */
-    protected $manager;
+    protected $advertManager;
 
-    public function __construct(Request $request, EntityManager $manager)
+    public function __construct(Request $request, AdvertManager $advertManager)
     {
         $this->request = $request;
-        $this->manager = $manager;
+        $this->advertManager = $advertManager;
     }
 
     /**
@@ -47,23 +48,37 @@ class FiltreAdvertHandler
 
     public function process()
     {
-            $this->form->handleRequest($this->request);
+        $adverts = null;
 
-            if ($this->form->isSubmitted() && $this->form->isValid()) {
-                $data = $this->form->getData();
+        if ($this->form->isValid()) {
+            $data = $this->form->getData();
 
-                if (null == $data['category']) {
-                    $adverts = $this->manager->getRepository('PifaceAppBundle:Advert')->findAll();
-                } else {
-                    $adverts = $this->manager->getRepository('PifaceAppBundle:Advert')->findBy(
-                        array('category' => $data)
-                    );
-                }
+            $keyWord = $data['kw'];
+            $category = $data['category'];
 
-                return $adverts;
+
+            if (null == $category && null == $keyWord) {
+                $adverts = $this->advertManager->getRepository()->findAll();
             }
 
-            return false;
+            if (null == $category && null != $keyWord) {
+                $adverts = $this->advertManager->getRepository()->findByKeyWord($keyWord);
+            }
+
+            if (null != $category && null == $keyWord) {
+                $adverts = $this->advertManager->getRepository()->findBy(
+                    array('category' => $category)
+                );
+            }
+
+            if(null != $category && null != $keyWord){
+                $adverts = $this->advertManager->getRepository()->findByOptions($category, $keyWord);
+            }
+
+            return $adverts;
+        }
+
+        return false;
     }
 
 

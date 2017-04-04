@@ -36,6 +36,30 @@ class AdvertRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
+    public function findByKeyWord($keyWord)
+    {
+        $q = $this->createQueryBuilder('w');
+
+        $q
+            ->where('w.title LIKE :keyword')
+            ->setParameter(':keyword', '%' . $keyWord . '%');
+
+        return $q->getQuery()->getResult();
+    }
+
+    public function findByOptions($category, $keyWord)
+    {
+        $q = $this->createQueryBuilder('o');
+
+        $q
+            ->where('o.category = :category')
+            ->setParameter(':category', $category)
+            ->andWhere('o.title LIKE :keyword')
+            ->setParameter(':keyword', '%' . $keyWord . '%');
+
+        return $q->getQuery()->getResult();
+    }
+
     public function isAuthorized($id)
     {
         $qb = $this->createQueryBuilder('a');

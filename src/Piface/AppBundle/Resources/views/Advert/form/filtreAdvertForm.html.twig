@@ -3,6 +3,10 @@
         {{ form_start(form) }}
         {{ form_errors(form) }}
 
+        {{ form_label(form.kw) }}
+        {{ form_widget(form.kw) }}
+        {{ form_errors(form.kw) }}
+
         {{ form_label(form.category) }}
         {{ form_widget(form.category) }}
         {{ form_errors(form.category) }}

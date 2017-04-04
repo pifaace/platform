@@ -11,5 +11,5 @@ services:
         scope: request
         arguments:
           - '@request'
-          - '@doctrine.orm.entity_manager'
+          - '@app.advert.manager'
 

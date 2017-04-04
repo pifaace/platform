@@ -37,6 +37,16 @@ class AdvertManager extends BaseManager
         return $this->getRepository()->getListAdvert($id);
     }
 
+    public function findByKeyWord($keyWord)
+    {
+        return $this->getRepository()->findByKeyWord($keyWord);
+    }
+
+    public function findByOptions($category, $keyWord)
+    {
+        return $this->getRepository()->findByOptions($category, $keyWord);
+    }
+
     public function isAuthorized($id)
     {
         return $this->getRepository()->isAuthorized($id);

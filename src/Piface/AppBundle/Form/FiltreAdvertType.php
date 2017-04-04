@@ -11,6 +11,7 @@ namespace Piface\AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class FiltreAdvertType extends AbstractType
 {
@@ -20,6 +21,14 @@ class FiltreAdvertType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->setMethod('GET')
+            ->add('kw', 'text', array(
+                'label' => false,
+                'required' => false,
+                'attr' => array(
+                    'placeholder' => "Que recherchez-vous ?"
+                )
+            ))
             ->add('category', 'entity', array(
                 'label' => 'Catégorie',
                 'class' => 'Piface\AppBundle\Entity\Category',
@@ -31,11 +40,18 @@ class FiltreAdvertType extends AbstractType
             ));
     }
 
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults(array(
+            'csrf_protection' => false,
+        ));
+    }
+
     /**
      * {@inheritdoc}
      */
     public function getBlockPrefix()
     {
-        return 'piface_appbundle_filtered_advert';
+        return 'filter';
     }
 }

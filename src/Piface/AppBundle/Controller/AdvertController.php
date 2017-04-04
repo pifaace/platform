@@ -11,7 +11,6 @@ namespace Piface\AppBundle\Controller;
 
 use Piface\AppBundle\Form\FiltreAdvertType;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class AdvertController extends BaseController
 {
@@ -35,7 +34,8 @@ class AdvertController extends BaseController
 
         $advertManager = $this->get('app.advert.manager');
 
-        if ('POST' == $request->getMethod()) {
+        $form->handleRequest($request);
+        if ($form->isSubmitted()) {
             $filterAdvertHandler = $this->get('filter.advert.handler.form');
             $filterAdvertHandler->setForm($form);
 

@@ -6,11 +6,6 @@ piface_app_advert_list:
     path:      /adverts/offers
     defaults: { _controller: PifaceAppBundle:Advert:list }
 
-#TODO:A supprimer
-#piface_app_adveret_list_filtered:
-#    path:    /adverts/offers/filtre
-#    defaults: { _controller: PifaceAppBundle:Advert:filteredList }
-
 piface_app_advert:
     path:      /advert/offer/{id}
     defaults: { _controller: PifaceAppBundle:Advert:show }
