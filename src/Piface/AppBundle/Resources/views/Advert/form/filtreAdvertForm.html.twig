@@ -1,0 +1,20 @@
+{% block filtre_advert_form %}
+    <section id="search-advert">
+        {{ form_start(form) }}
+        {{ form_errors(form) }}
+
+        {{ form_label(form.kw) }}
+        {{ form_widget(form.kw) }}
+        {{ form_errors(form.kw) }}
+
+        {{ form_label(form.category) }}
+        {{ form_widget(form.category) }}
+        {{ form_errors(form.category) }}
+
+        <button id="filteredAdvert" type="submit" >Recherche</button>
+
+
+        {{ form_rest(form) }}
+        {{ form_end(form) }}
+    </section>
+{% endblock %}

@@ -9,6 +9,9 @@
 namespace Piface\AppBundle\Controller;
 
 
+use Piface\AppBundle\Form\FiltreAdvertType;
+use Symfony\Component\HttpFoundation\Request;
+
 class AdvertController extends BaseController
 {
     public function showAction($id)
@@ -25,12 +28,25 @@ class AdvertController extends BaseController
         ));
     }
 
-    public function listAction()
+    public function listAction(Request $request)
     {
+        $form = $this->createForm(new FiltreAdvertType());
+
         $advertManager = $this->get('app.advert.manager');
-        $adverts = $advertManager->getRepository()->findAll();
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted()) {
+            $filterAdvertHandler = $this->get('filter.advert.handler.form');
+            $filterAdvertHandler->setForm($form);
+
+            $adverts = $filterAdvertHandler->process();
+        } else {
+            $adverts = $advertManager->getRepository()->findAll();
+        }
+
         return $this->render('PifaceAppBundle:Advert:listAdvert.html.twig', array(
-            'adverts' => $adverts
+            'adverts' => $adverts,
+            'form' => $form->createView()
         ));
     }
 }

@@ -15,3 +15,9 @@ services:
             parent: app.base.manager
             tags:
                 - { name: app.manager }
+
+        app.category.manager:
+            class: Piface\AppBundle\Manager\CategoryManager
+            parent: app.base.manager
+            tags:
+                - { name: app.manager }

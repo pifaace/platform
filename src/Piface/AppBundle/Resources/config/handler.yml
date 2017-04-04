@@ -5,3 +5,11 @@ services:
         arguments:
          - '@request'
          - '@doctrine.orm.entity_manager'
+
+    filter.advert.handler.form:
+        class: Piface\AppBundle\Form\Handler\FiltreAdvertHandler
+        scope: request
+        arguments:
+          - '@request'
+          - '@app.advert.manager'
+
