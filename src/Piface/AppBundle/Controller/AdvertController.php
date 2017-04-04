@@ -36,6 +36,11 @@ class AdvertController extends BaseController
 
         $form->handleRequest($request);
         if ($form->isSubmitted()) {
+
+            if (false == $this->checkUrl($request)) {
+                return $this->redirectToRoute('piface_app_home');
+            }
+
             $filterAdvertHandler = $this->get('filter.advert.handler.form');
             $filterAdvertHandler->setForm($form);
 
@@ -48,5 +53,24 @@ class AdvertController extends BaseController
             'adverts' => $adverts,
             'form' => $form->createView()
         ));
+    }
+
+
+    private function checkUrl(Request $request)
+    {
+        $category_array = ['', '1', '2', '3', '4', '5', '6', '7'];
+
+        try {
+            $urlPara = $request->query->get('filter');
+            $urlPara['kw'];
+
+            if (!in_array($urlPara['category'], $category_array)) {
+                return false;
+            }
+        } catch (\Exception $e) {
+            return false;
+        }
+
+        return true;
     }
 }
