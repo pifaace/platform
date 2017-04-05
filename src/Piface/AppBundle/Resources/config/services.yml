@@ -2,4 +2,13 @@ imports:
     - { resource: manager.yml }
     - { resource: handler.yml }
 
+services:
+    action_advert_voter:
+        class: Piface\AppBundle\Security\ActionAdvertVoter
+        arguments:
+            - '@app.advert.manager'
+            - '@security.access.decision_manager'
+        public: false
+        tags:
+            - { name: security.voter }
 
