@@ -2,10 +2,14 @@
 
 namespace Piface\AppBundle\Controller;
 
+use Doctrine\ORM\Internal\Hydration\HydrationException;
 use Piface\AppBundle\Controller\BaseController;
 use Piface\AppBundle\Entity\Advert;
 use Piface\AppBundle\Form\AdvertType;
 use Piface\AppBundle\Form\EditAdvertType;
+use Piface\AppBundle\Security\ActionAdvertVoter;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
@@ -46,7 +50,9 @@ class UserAdvertController extends BaseController
         $advertManager = $this->get('app.advert.manager');
         $advert = $advertManager->getRepository()->find($id);
 
-        $this->controleAccess($advertManager, $advert, $id);
+        if (false == $this->isGranted('edit', $advert)) {
+            throw $this->createNotFoundException("Cette annonce n'existe pas");
+        }
 
         $editForm = $this->createForm(new EditAdvertType(), $advert);
 
@@ -68,7 +74,9 @@ class UserAdvertController extends BaseController
         $advertManager = $this->get('app.advert.manager');
         $advert = $advertManager->getRepository()->find($id);
 
-        $this->controleAccess($advertManager, $advert, $id);
+        if (false == $this->isGranted('delete', $advert)) {
+            throw $this->createNotFoundException("Cette annonce n'existe pas");
+        }
 
         $form = $this->createFormBuilder()->getForm();
         $advertHandler = $this->get('advert.handler.form');
@@ -83,20 +91,4 @@ class UserAdvertController extends BaseController
             'form' => $form->createView()
         ));
     }
-
-    private function controleAccess($advertManager, $advert, $id)
-    {
-        $userId = $this->getUser()->getId();
-
-        if (null == $advert) {
-            throw $this->createNotFoundException('L\'annonce ' . $id . ' n\'existe pas');
-        }
-        $matchAdvert = $advertManager->isAuthorized($id);
-
-        if ($matchAdvert['id'] != $userId) {
-            throw new NotFoundHttpException('Cette annonce n\'existe pas');
-        }
-
-    }
-
 }
