@@ -4,7 +4,9 @@ namespace Piface\AppBundle\Form\Handler;
 
 use Doctrine\ORM\EntityManager;
 use Piface\AppBundle\Entity\Advert;
+use Piface\AppBundle\EventListener\CensorEvent;
 use Piface\UserBundle\Entity\User;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -42,11 +44,17 @@ class AdvertHandler
      */
     protected $manager;
 
+    /**
+     * @var ContainerInterface
+     */
+    protected $container;
 
-    public function __construct(Request $request, EntityManager $manager)
+
+    public function __construct(Request $request, EntityManager $manager, ContainerInterface $container)
     {
         $this->request = $request;
         $this->manager = $manager;
+        $this->container = $container;
     }
 
     /**
@@ -81,7 +89,13 @@ class AdvertHandler
             $this->form->handleRequest($this->request);
 
             if ($this->form->isSubmitted() && $this->form->isValid()) {
+
                 $this->advert = $this->form->getData();
+
+                $event = new CensorEvent($this->advert->getContent(), $this->user);
+                $this->container->get('event_dispatcher')->dispatch('app.censor.message', $event);
+                $this->advert->setContent($event->getMessage());
+
                 if ('create' == $mode) {
                     $this->advert->setAuthor($this->user->getName());
                     $this->advert->setUser($this->user);

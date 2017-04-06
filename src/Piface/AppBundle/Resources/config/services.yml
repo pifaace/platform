@@ -3,7 +3,7 @@ imports:
     - { resource: handler.yml }
 
 services:
-    action_advert_voter:
+    action.advert.voter:
         class: Piface\AppBundle\Security\ActionAdvertVoter
         arguments:
             - '@app.advert.manager'
@@ -12,3 +12,12 @@ services:
         tags:
             - { name: security.voter }
 
+    censor.advert_processor:
+        class: Piface\AppBundle\Services\CensorProcessor
+
+    censor.advert_listener:
+        class: Piface\AppBundle\EventListener\CensorListener
+        arguments:
+            - '@censor.advert_processor'
+        tags:
+            - { name: kernel.event_listener, event: app.censor.message, method: processCensor }
