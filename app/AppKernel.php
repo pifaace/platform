@@ -23,6 +23,7 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
             new Vich\UploaderBundle\VichUploaderBundle(),
             new Liip\ImagineBundle\LiipImagineBundle(),
+            new Bmatzner\FontAwesomeBundle\BmatznerFontAwesomeBundle(),
 
         //My bundle
             new Piface\UserBundle\PifaceUserBundle(),

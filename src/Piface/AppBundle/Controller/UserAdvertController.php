@@ -57,6 +57,7 @@ class UserAdvertController extends BaseController
         $editForm = $this->createForm(new EditAdvertType(), $advert);
 
         $advertHandler = $this->get('advert.handler.form');
+        $advertHandler->setUser($this->getUser());
         $advertHandler->setForm($editForm);
 
         if ($advertHandler->process('edit')) {

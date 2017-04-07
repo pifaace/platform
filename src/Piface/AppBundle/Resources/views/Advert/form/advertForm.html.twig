@@ -37,6 +37,12 @@
             {{ form_errors(form.image) }}
         </div>
 
+        <div class="form-group">
+            {{ form_label(form.forward) }}
+            {{ form_widget(form.forward) }}
+            {{ form_errors(form.forward) }}
+        </div>
+
         <button id="addAdvert" type="submit" class="btn-anti-spam btn btn-primary">Publier mon annonce</button>
 
         {{ form_rest(form) }}

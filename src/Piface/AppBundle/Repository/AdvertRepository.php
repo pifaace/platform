@@ -72,4 +72,5 @@ class AdvertRepository extends EntityRepository
 
         return $qb->getQuery()->getOneOrNullResult();
     }
+
 }
