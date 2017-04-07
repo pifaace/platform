@@ -34,6 +34,10 @@ class AdvertType extends AbstractType
             ->add('image', new ImageType(), array(
                 'label' => false,
                 'required' => false
+            ))
+            ->add('forward', 'checkbox', array(
+               'label' => "Mettre en avant",
+                'required' => false
             ));
     }
 

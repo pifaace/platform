@@ -31,26 +31,29 @@ class AdvertController extends BaseController
     public function listAction(Request $request)
     {
         $form = $this->createForm(new FiltreAdvertType());
-
         $advertManager = $this->get('app.advert.manager');
 
         $form->handleRequest($request);
         if ($form->isSubmitted()) {
-
             if (false == $this->checkUrl($request)) {
                 return $this->redirectToRoute('piface_app_home');
             }
-
             $filterAdvertHandler = $this->get('filter.advert.handler.form');
             $filterAdvertHandler->setForm($form);
-
             $adverts = $filterAdvertHandler->process();
         } else {
             $adverts = $advertManager->getRepository()->findAll();
         }
 
+        $advertsForwardArray = $advertManager->getRepository()->findBy(array(
+            'forward' => true
+        ));
+
+        $advertsForward = $this->randomAdvertForward($advertsForwardArray);
+
         return $this->render('PifaceAppBundle:Advert:listAdvert.html.twig', array(
             'adverts' => $adverts,
+            'advertsForward' => $advertsForward,
             'form' => $form->createView()
         ));
     }
@@ -72,5 +75,21 @@ class AdvertController extends BaseController
         }
 
         return true;
+    }
+
+    private function randomAdvertForward($advertForwardArray)
+    {
+        $advertRand = array();
+        if (count($advertForwardArray) > 3) {
+            $rand_advert = array_rand($advertForwardArray, 3);
+
+            for ($i = 0 ; $i < 3; $i++) {
+                $advertRand[] = $advertForwardArray[$rand_advert[$i]];
+            }
+
+            return $advertRand;
+        }
+
+        return $advertForwardArray;
     }
 }

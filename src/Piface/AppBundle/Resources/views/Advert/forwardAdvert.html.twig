@@ -1,0 +1,33 @@
+<aside class="col-md-3">
+    <section class="tab-content">
+        <p class="align-center forward-title">Les annonces à la UNE</p>
+        <div id="forward-container">
+            <ul>
+                {% for advertForward in advertsForward %}
+                    <li class="border-b">
+                        <a href="{{ path('piface_app_advert', {'id': advertForward.id}) }}" class="list-item"
+                           data-info="{{ number }}">
+                            <div class="item-image-forward">
+                                <span class="item_imagePic">
+                                    {% if advertForward.image.imageFile is defined %}
+                                        <img src="{{ asset(vich_uploader_asset(advertForward.image, 'imageFile') | imagine_filter('my_thumb')) }}"
+                                             alt="{{ advertForward.image.imageName }}">
+                                {% else %}
+                                        {% image '@PifaceAppBundle/Resources/public/images/no-image.png' %}
+                                        <img src="{{ asset_url | imagine_filter('my_thumb') }}"
+                                             alt="no-picture"/>
+                                        {% endimage %}
+                                    {% endif %}
+                                </span>
+                            </div>
+
+                            <h4 class="item-info-title align-center">{{ advertForward.title }}</h4>
+                            <h3 class="item-info-prix">{{ advertForward.prix }} €</h3>
+
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </section>
+</aside>

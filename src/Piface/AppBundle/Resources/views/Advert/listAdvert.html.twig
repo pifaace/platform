@@ -9,17 +9,19 @@
         {% include 'PifaceAppBundle:Advert/form:filtreAdvertForm.html.twig' %}
     {% endblock %}
 
-    <section>
-        <h4>LES ANNONCES</h4>
-        <section class="tab-content block-white">
-            {% if adverts is not empty %}
-                <ul>
-                    {% for advert in adverts %}
-                        {% set number = number + 1 %}
-                        <li class="border-b">
-                            <a href="{{ path('piface_app_advert', {'id': advert.id}) }}" class="list-item"
-                               data-info="{{ number }}">
-                                <div class="item-image">
+    <section id="list-Ads">
+        <div class="row">
+            <section class="tab-content col-md-9">
+                <h4>LES ANNONCES</h4>
+                <section class="block-white">
+                    {% if adverts is not empty %}
+                        <ul>
+                            {% for advert in adverts %}
+                                {% set number = number + 1 %}
+                                <li class="border-b">
+                                    <a href="{{ path('piface_app_advert', {'id': advert.id}) }}" class="list-item"
+                                       data-info="{{ number }}">
+                                        <div class="item-image">
                                 <span class="item_imagePic">
                                     {% if advert.image.imageFile is defined %}
                                         <img src="{{ asset(vich_uploader_asset(advert.image, 'imageFile') | imagine_filter('my_thumb')) }}"
@@ -31,29 +33,35 @@
                                         {% endimage %}
                                     {% endif %}
                                 </span>
-                                </div>
-                                <section class="item-info">
-                                    <h4 class="item-info-title">{{ advert.title }}</h4>
-                                    <p>{{ advert.category.name }}</p>
-                                    <h3 class="item-info-prix">{{ advert.prix }} €</h3>
-                                    <aside class="item-absolute">
-                                        <p>
-                                            {% if currentDate ==  advert.date|date('d/m/Y') %}
-                                                Aujourd'hui
-                                            {% else %}
-                                                {{ advert.date|date('d/m/Y') }}
-                                            {% endif %}
-                                            à {{ advert.date|date('H:i:s') }}
-                                        </p>
-                                    </aside>
-                                </section>
-                            </a>
-                        </li>
-                    {% endfor %}
-                </ul>
-            {% else %}
-                <p>Aucune annonce pour les critères demandés</p>
-            {% endif %}
-        </section>
+                                        </div>
+                                        <section class="item-info">
+                                            <h4 class="item-info-title">{{ advert.title }}</h4>
+                                            <p>{{ advert.category.name }}</p>
+                                            <h3 class="item-info-prix">{{ advert.prix }} €</h3>
+                                            <aside class="item-absolute">
+                                                <p>
+                                                    {% if currentDate ==  advert.date|date('d/m/Y') %}
+                                                        Aujourd'hui
+                                                    {% else %}
+                                                        {{ advert.date|date('d/m/Y') }}
+                                                    {% endif %}
+                                                    à {{ advert.date|date('H:i:s') }}
+                                                </p>
+                                            </aside>
+                                        </section>
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p>Aucune annonce pour les critères demandés</p>
+                    {% endif %}
+                </section>
+            </section>
+
+            {% block forward_advert_section %}
+                {% include 'PifaceAppBundle:Advert:forwardAdvert.html.twig' %}
+            {% endblock %}
+        </div>
     </section>
 {% endblock %}

@@ -28,7 +28,6 @@ a {
 #container {
     max-width: 1066px;
     min-width: 320px;
-    margin: auto;
 }
 
 .dashboard-content {
@@ -38,4 +37,8 @@ a {
 /** CLASSES DE BASE **/
 .block-white {
     background-color: #fff;
+}
+
+.align-center {
+    text-align: center;
 }

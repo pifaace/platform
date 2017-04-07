@@ -2,7 +2,6 @@
 
 section.tab-content {
     border: 1px solid #B1B9BB;
-    width: 75%;
 }
 
 li.border-b {
@@ -37,6 +36,17 @@ ul li div.item-image {
 
 }
 
+ul li div.item-image-forward {
+    position: relative;
+    float: none;
+    overflow: hidden;
+    min-width: 100%;
+    min-height: 120px;
+    max-height: 100%;
+    background: #f2f2f2;
+
+}
+
 span.item_imagePic {
     display: block;
     height: 100%;
@@ -64,4 +74,13 @@ section.item-info > .item-absolute {
     position: absolute;
     bottom: 0;
     right: 0;
+}
+
+/** MISE EN PAGE ANNONCES A LA UNE **/
+
+.forward-title {
+    background: #337ab7;
+    color: #fff;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }

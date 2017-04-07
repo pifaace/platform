@@ -87,6 +87,13 @@ class Advert
      */
     private $image;
 
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="forward", type="boolean")
+     */
+    private $forward;
+
     public function __construct()
     {
         $this->date = new \DateTime();
@@ -257,5 +264,21 @@ class Advert
     public function setImage($image)
     {
         $this->image = $image;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getForward()
+    {
+        return $this->forward;
+    }
+
+    /**
+     * @param mixed $forward
+     */
+    public function setForward($forward)
+    {
+        $this->forward = $forward;
     }
 }
