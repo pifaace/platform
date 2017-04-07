@@ -76,6 +76,14 @@ section.item-info > .item-absolute {
     right: 0;
 }
 
+div.save-adv {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px;
+    z-index: 9999;
+}
+
 /** MISE EN PAGE ANNONCES A LA UNE **/
 
 .forward-title {
