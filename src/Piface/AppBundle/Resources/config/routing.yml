@@ -10,6 +10,9 @@ piface_app_advert:
     path:      /advert/offer/{id}
     defaults: { _controller: PifaceAppBundle:Advert:show }
 
+piface_app_save_advert:
+    path:     /advert/advert-save
+    defaults: { _controller: PifaceAppBundle:Advert:advSave }
 
 #Espace personnel user
 piface_app_my_advert_list:

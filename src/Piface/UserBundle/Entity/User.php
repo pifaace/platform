@@ -54,6 +54,18 @@ class User extends BaseUser
      */
     protected $sexe;
 
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Piface\AppBundle\Entity\Advert")
+     * @ORM\JoinColumn=(nullable=true)
+     */
+    protected $advsSave;
+
+    public function __construct()
+    {
+        $this->advsSave = new ArrayCollection();
+    }
+
     /**
      * Get id
      *
@@ -126,5 +138,38 @@ class User extends BaseUser
     public function setSexe($sexe)
     {
         $this->sexe = $sexe;
+    }
+
+    /**
+     * Add advsSave
+     *
+     * @param Advert $advsSave
+     * @return User
+     */
+    public function addAdvsSave(Advert $advsSave)
+    {
+        $this->advsSave[] = $advsSave;
+
+        return $this;
+    }
+
+    /**
+     * Remove advsSave
+     *
+     * @param Advert $advsSave
+     */
+    public function removeAdvsSave(Advert $advsSave)
+    {
+        $this->advsSave->removeElement($advsSave);
+    }
+
+    /**
+     * Get advsSave
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAdvsSave()
+    {
+        return $this->advsSave;
     }
 }

@@ -14,6 +14,10 @@ use Symfony\Component\HttpFoundation\Request;
 
 class AdvertController extends BaseController
 {
+    /**
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function showAction($id)
     {
         $advertManager = $this->get('app.advert.manager');
@@ -28,6 +32,10 @@ class AdvertController extends BaseController
         ));
     }
 
+    /**
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
     public function listAction(Request $request)
     {
         $form = $this->createForm(new FiltreAdvertType());
@@ -58,7 +66,15 @@ class AdvertController extends BaseController
         ));
     }
 
+    public function advSaveAction()
+    {
+        
+    }
 
+    /**
+     * @param Request $request
+     * @return bool
+     */
     private function checkUrl(Request $request)
     {
         $category_array = ['', '1', '2', '3', '4', '5', '6', '7'];
@@ -77,13 +93,17 @@ class AdvertController extends BaseController
         return true;
     }
 
+    /**
+     * @param $advertForwardArray
+     * @return array
+     */
     private function randomAdvertForward($advertForwardArray)
     {
         $advertRand = array();
         if (count($advertForwardArray) > 3) {
             $rand_advert = array_rand($advertForwardArray, 3);
 
-            for ($i = 0 ; $i < 3; $i++) {
+            for ($i = 0; $i < 3; $i++) {
                 $advertRand[] = $advertForwardArray[$rand_advert[$i]];
             }
 
