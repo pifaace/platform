@@ -18,7 +18,7 @@
             {% for advert in adverts %}
                 <div class="element" id="element_{{ count }}">
                     <div class="date">
-                        {{ advert.date|date('d/m/Y') }}
+                        {{ advert.createdAt|date('d/m/Y') }}
                     </div>
                     <div class="image">
                         {% if advert.image.imageFile is defined %}

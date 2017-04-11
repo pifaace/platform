@@ -23,6 +23,8 @@ class AdvertController extends BaseController
             throw $this->createNotFoundException('L\'annonce ' . $id . ' n\'existe pas');
         }
 
+
+
         return $this->render('PifaceAppBundle:Advert:showAdvert.html.twig', array(
             'advert' => $advert
         ));
