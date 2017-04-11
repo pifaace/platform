@@ -10,6 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Table(name="platform_advert")
  * @ORM\Entity(repositoryClass="Piface\AppBundle\Repository\AdvertRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Advert
 {
@@ -53,9 +54,14 @@ class Advert
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date", type="datetimetz")
+     * @ORM\Column(name="createdAt", type="datetime")
      */
-    protected $date;
+    protected $createdAt;
+
+    /**
+     * @ORM\Column(name="updated_at", type="datetime", nullable=true)
+     */
+    protected $updatedAt;
 
     /**
      * @var integer
@@ -96,7 +102,7 @@ class Advert
 
     public function __construct()
     {
-        $this->date = new \DateTime();
+        $this->createdAt = new \DateTime();
     }
 
     /**
@@ -184,9 +190,9 @@ class Advert
      * @param \DateTime $date
      * @return Advert
      */
-    public function setDate($date)
+    public function setCreatedAt($date)
     {
-        $this->date = $date;
+        $this->createdAt = $date;
 
         return $this;
     }
@@ -196,9 +202,9 @@ class Advert
      *
      * @return \DateTime
      */
-    public function getDate()
+    public function getCreatedAt()
     {
-        return $this->date;
+        return $this->createdAt;
     }
 
     /**
@@ -280,5 +286,29 @@ class Advert
     public function setForward($forward)
     {
         $this->forward = $forward;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * @param mixed $updatedAt
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function updateDate()
+    {
+        $this->setUpdatedAt(new \DateTime());
     }
 }

@@ -40,12 +40,12 @@
                                             <h3 class="item-info-prix">{{ advert.prix }} €</h3>
                                             <aside class="item-absolute">
                                                 <p>
-                                                    {% if currentDate ==  advert.date|date('d/m/Y') %}
+                                                    {% if currentDate ==  advert.createdAt|date('d/m/Y') %}
                                                         Aujourd'hui
                                                     {% else %}
-                                                        {{ advert.date|date('d/m/Y') }}
+                                                        {{ advert.createdAt|date('d/m/Y') }}
                                                     {% endif %}
-                                                    à {{ advert.date|date('H:i:s') }}
+                                                    à {{ advert.createdAt|date('H:i:s') }}
                                                 </p>
                                             </aside>
                                         </section>
