@@ -5,7 +5,7 @@ services:
         arguments:
          - '@request'
          - '@doctrine.orm.entity_manager'
-         - '@service_container'
+         - '@event_dispatcher'
 
     filter.advert.handler.form:
         class: Piface\AppBundle\Form\Handler\FiltreAdvertHandler

@@ -76,7 +76,7 @@ class Advert
      * @ORM\ManyToOne(targetEntity="Piface\UserBundle\Entity\User")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $user;
+    protected $user;
 
     /**
      * @Assert\NotBlank()
@@ -84,21 +84,23 @@ class Advert
      * @ORM\ManyToOne(targetEntity="Piface\AppBundle\Entity\Category", inversedBy="adverts")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $category;
+    protected $category;
 
     /**
      * @ORM\OneToOne(targetEntity="Piface\AppBundle\Entity\Image", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=true)
      *
      */
-    private $image;
+    protected $image;
 
     /**
      * @var boolean
      *
      * @ORM\Column(name="forward", type="boolean")
      */
-    private $forward;
+    protected $forward;
+
+
 
     public function __construct()
     {

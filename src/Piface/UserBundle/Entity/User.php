@@ -55,6 +55,11 @@ class User extends BaseUser
     protected $sexe;
 
     /**
+     * @ORM\Column(name="warning", type="integer", nullable=false)
+     */
+    protected $warning;
+
+    /**
      * Get id
      *
      * @return integer
@@ -126,5 +131,21 @@ class User extends BaseUser
     public function setSexe($sexe)
     {
         $this->sexe = $sexe;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getWarning()
+    {
+        return $this->warning;
+    }
+
+    /**
+     * @param mixed $warning
+     */
+    public function setWarning($warning)
+    {
+        $this->warning = $warning;
     }
 }

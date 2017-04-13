@@ -60,6 +60,7 @@ class UserAdvertController extends BaseController
         $advertHandler->setUser($this->getUser());
         $advertHandler->setForm($editForm);
 
+
         if ($advertHandler->process('edit')) {
             return $this->redirectToRoute('piface_app_advert', array('id' => $advert->getId()));
         }

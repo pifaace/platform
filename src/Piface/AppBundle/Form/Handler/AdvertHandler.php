@@ -9,6 +9,7 @@ use Piface\UserBundle\Entity\User;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Debug\TraceableEventDispatcher;
 
 /**
  * Created by PhpStorm.
@@ -45,16 +46,16 @@ class AdvertHandler
     protected $manager;
 
     /**
-     * @var ContainerInterface
+     * @var TraceableEventDispatcher
      */
-    protected $container;
+    protected $eventDispatcherService;
 
 
-    public function __construct(Request $request, EntityManager $manager, ContainerInterface $container)
+    public function __construct(Request $request, EntityManager $manager, TraceableEventDispatcher $eventDispatcherService)
     {
         $this->request = $request;
         $this->manager = $manager;
-        $this->container = $container;
+        $this->eventDispatcherService = $eventDispatcherService;
     }
 
     /**
@@ -93,7 +94,9 @@ class AdvertHandler
                 $this->advert = $this->form->getData();
 
                 $event = new CensorEvent($this->advert->getContent(), $this->user);
-                $this->container->get('event_dispatcher')->dispatch('app.censor.message', $event);
+
+                $this->controleAdvertContent($this->user, $this->advert->getContent());
+                $this->eventDispatcherService->dispatch('app.censor.message', $event);
                 $this->advert->setContent($event->getMessage());
 
                 if ('create' == $mode) {
@@ -101,6 +104,7 @@ class AdvertHandler
                     $this->advert->setUser($this->user);
                 }
                 $this->onSuccess($this->advert);
+
                 return true;
             }
         }
@@ -131,4 +135,16 @@ class AdvertHandler
         }
         return false;
     }
+
+    public function controleAdvertContent(User $user, $content)
+    {
+        $censorWords = array('putain', 'connard', 'encule', 'pd', 'salaud');
+
+        foreach ($censorWords as $censorWord) {
+            if (preg_match('#' . $censorWord . '#', $content)) {
+                $user->setWarning($user->getWarning() + 1);
+            }
+        }
+    }
+
 }
