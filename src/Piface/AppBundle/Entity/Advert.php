@@ -100,11 +100,19 @@ class Advert
      */
     protected $forward;
 
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="off_charter", type="boolean")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    protected $OffCharter;
 
 
     public function __construct()
     {
         $this->createdAt = new \DateTime();
+        $this->OffCharter = false;
     }
 
     /**
@@ -312,5 +320,28 @@ class Advert
     public function updateDate()
     {
         $this->setUpdatedAt(new \DateTime());
+    }
+
+    /**
+     * Set OffCharter
+     *
+     * @param boolean $offCharter
+     * @return Advert
+     */
+    public function setOffCharter($offCharter)
+    {
+        $this->OffCharter = $offCharter;
+
+        return $this;
+    }
+
+    /**
+     * Get OffCharter
+     *
+     * @return boolean 
+     */
+    public function getOffCharter()
+    {
+        return $this->OffCharter;
     }
 }
