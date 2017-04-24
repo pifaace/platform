@@ -5,11 +5,22 @@
 {% block page_content %}
     {% set pluriel = (countAdvert <= 1) ? 'annonce' : 'annonces' %}
     {% set count = 1 %}
+
+    {% for flashMessage in app.session.flashBag.get('notice') %}
+        <div class="alert alert-danger">
+            <p>ATTENTION : Cette annonce a été jugé comme non respect de la charte de respect. Cette annonce n'est donc
+                pas mise en ligne et sera supprimer...
+                <br>
+                De plus vous recevez un avertissement.</p>
+            <p>Pour rappel, au bout de 3 avertissements, votre compte se vera banni définitivement.</p>
+        </div>
+    {% endfor %}
+
     <div class="dashboard-content block-white">
 
         <h3>Mon tableau de bord</h3>
 
-            <a href="{{ path('piface_app_advert_add') }}">Déposer une annonce !</a>
+        <a href="{{ path('piface_app_advert_add') }}">Déposer une annonce !</a>
 
         <h4>{{ countAdvert }} {{ pluriel }} en ligne</h4>
         <hr>
@@ -31,15 +42,15 @@
                         {{ advert.category.name }}<br>
                         {{ advert.prix }}€
                     </div>
-                    <div class="action">
-                        {#<div class="edit">#}
-                        <a href="{{ path('piface_app_my_advert_edit', {'id': advert.id}) }}">MODIFIER</a>
-                        {#</div>#}
-                        <div class="hr"></div>
-                        {#<div class="delete">#}
-                        <a href="{{ path('piface_app_my_advert_delete', {'id': advert.id}) }}">SUPPRIMER</a>
-                        {#</div>#}
-                    </div>
+                    {% if advert.offCharter == false %}
+                        <div class="action">
+                            <a href="{{ path('piface_app_my_advert_edit', {'id': advert.id}) }}">MODIFIER</a>
+                            <div class="hr"></div>
+                            <a href="{{ path('piface_app_my_advert_delete', {'id': advert.id}) }}">SUPPRIMER</a>
+                        </div>
+                    {% else %}
+                        <p>Cette annonce est bloqué.</p>
+                    {% endif %}
                 </div>
                 {% set count = count + 1 %}
             {% endfor %}

@@ -51,4 +51,9 @@ class AdvertManager extends BaseManager
     {
         return $this->getRepository()->isAuthorized($id);
     }
+
+    public function getOffCharter($advertId)
+    {
+        return $this->getRepository()->getOffCharter($advertId);
+    }
 }

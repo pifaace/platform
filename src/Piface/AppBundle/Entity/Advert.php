@@ -106,13 +106,13 @@ class Advert
      * @ORM\Column(name="off_charter", type="boolean")
      * @ORM\JoinColumn(nullable=true)
      */
-    protected $OffCharter;
+    protected $offCharter;
 
 
     public function __construct()
     {
         $this->createdAt = new \DateTime();
-        $this->OffCharter = false;
+        $this->offCharter = false;
     }
 
     /**
@@ -330,7 +330,7 @@ class Advert
      */
     public function setOffCharter($offCharter)
     {
-        $this->OffCharter = $offCharter;
+        $this->offCharter = $offCharter;
 
         return $this;
     }
@@ -342,6 +342,6 @@ class Advert
      */
     public function getOffCharter()
     {
-        return $this->OffCharter;
+        return $this->offCharter;
     }
 }

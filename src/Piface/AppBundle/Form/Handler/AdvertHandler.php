@@ -6,7 +6,6 @@ use Doctrine\ORM\EntityManager;
 use Piface\AppBundle\Entity\Advert;
 use Piface\AppBundle\EventListener\CensorEvent;
 use Piface\UserBundle\Entity\User;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Debug\TraceableEventDispatcher;
@@ -93,7 +92,7 @@ class AdvertHandler
 
                 $this->advert = $this->form->getData();
 
-                $this->controleAdvertContent($this->user, $this->advert->getContent());
+                $warning = $this->controleAdvertContent($this->user, $this->advert->getContent());
 
                 $event = new CensorEvent($this->advert->getContent(), $this->user);
                 $this->eventDispatcherService->dispatch('app.censor.message', $event);
@@ -105,7 +104,12 @@ class AdvertHandler
                 }
                 $this->onSuccess($this->advert);
 
-                return true;
+                if (true == $warning) {
+                    return "warning";
+                } else {
+                    return true;
+                }
+
             }
         }
         return false;
@@ -145,8 +149,10 @@ class AdvertHandler
                 $user->setWarning($user->getWarning() + 1);
                 $this->advert->setOffCharter(true);
 
+                return true;
             }
         }
+        return false;
     }
 
 }

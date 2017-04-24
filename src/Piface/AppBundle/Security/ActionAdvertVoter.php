@@ -19,6 +19,7 @@ class ActionAdvertVoter extends Voter
 {
     const EDIT = 'edit';
     const DELETE = 'delete';
+    const VIEW = 'view';
 
     /**
      * @var AdvertManager
@@ -35,7 +36,7 @@ class ActionAdvertVoter extends Voter
 
     public function supports($attribute, $object)
     {
-        if (!in_array($attribute, array(self::EDIT, self::DELETE))) {
+        if (!in_array($attribute, array(self::EDIT, self::DELETE, self::VIEW))) {
             return false;
         }
 
@@ -65,6 +66,8 @@ class ActionAdvertVoter extends Voter
                 return $this->canEdit($advert, $user);
             case self::DELETE:
                 return $this->canDelete($advert, $user);
+            case self::VIEW:
+                return $this->canView($advert);
         }
 
         throw new \LogicException('This code shouldnt be reached !');
@@ -73,6 +76,12 @@ class ActionAdvertVoter extends Voter
     private function canEdit(Advert $advert, User $user)
     {
         if (null == $advert) {
+            return false;
+        }
+
+        $offCharter = $this->advertManager->getOffCharter($advert->getId());
+
+        if (true == $offCharter) {
             return false;
         }
 
@@ -91,6 +100,12 @@ class ActionAdvertVoter extends Voter
             return false;
         }
 
+        $offCharter = $this->advertManager->getOffCharter($advert->getId());
+
+        if (true == $offCharter) {
+            return false;
+        }
+
         $matchAdvert = $this->advertManager->isAuthorized($advert->getId());
 
         if ($matchAdvert['id'] != $user->getId()) {
@@ -98,5 +113,21 @@ class ActionAdvertVoter extends Voter
         }
 
         return true;
+    }
+
+    private function canView(Advert $advert)
+    {
+        if (null == $advert) {
+            return false;
+        }
+
+        $offCharter = $this->advertManager->getOffCharter($advert->getId());
+
+        if (true == $offCharter) {
+            return false;
+        }
+
+        return true;
+
     }
 }

@@ -30,6 +30,10 @@ class AdvertRepository extends EntityRepository
         $qb = $this->createQueryBuilder('a');
 
         $qb
+            ->leftJoin('a.category', 'cat')
+            ->addSelect('cat')
+            ->leftJoin('a.image', 'img')
+            ->addSelect('img')
             ->where('a.user = :user')
             ->setParameter(':user', $id);
 
@@ -71,6 +75,18 @@ class AdvertRepository extends EntityRepository
             ->setParameter(':id', $id);
 
         return $qb->getQuery()->getOneOrNullResult();
+    }
+
+    public function getOffCharter($advertId)
+    {
+        $qb = $this->createQueryBuilder('o');
+
+        $qb
+            ->select('o.offCharter')
+            ->where('o.id = :advertId')
+            ->setParameter(':advertId', $advertId);
+
+        return $qb->getQuery()->getSingleScalarResult();
     }
 
 }
