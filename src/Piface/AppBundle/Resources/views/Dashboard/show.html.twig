@@ -42,15 +42,11 @@
                         {{ advert.category.name }}<br>
                         {{ advert.prix }}€
                     </div>
-                    {% if advert.offCharter == false %}
                         <div class="action">
                             <a href="{{ path('piface_app_my_advert_edit', {'id': advert.id}) }}">MODIFIER</a>
                             <div class="hr"></div>
                             <a href="{{ path('piface_app_my_advert_delete', {'id': advert.id}) }}">SUPPRIMER</a>
                         </div>
-                    {% else %}
-                        <p>Cette annonce est bloqué.</p>
-                    {% endif %}
                 </div>
                 {% set count = count + 1 %}
             {% endfor %}

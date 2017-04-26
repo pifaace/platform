@@ -61,7 +61,6 @@ class AdvertController extends BaseController
         ));
     }
 
-
     private function checkUrl(Request $request)
     {
         $category_array = ['', '1', '2', '3', '4', '5', '6', '7'];

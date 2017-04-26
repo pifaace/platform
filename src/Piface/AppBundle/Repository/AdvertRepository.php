@@ -35,6 +35,7 @@ class AdvertRepository extends EntityRepository
             ->leftJoin('a.image', 'img')
             ->addSelect('img')
             ->where('a.user = :user')
+            ->andWhere('a.offCharter = 0')
             ->setParameter(':user', $id);
 
         return $qb->getQuery()->getResult();
