@@ -42,9 +42,7 @@ class AdvertController extends BaseController
             $filterAdvertHandler->setForm($form);
             $adverts = $filterAdvertHandler->process();
         } else {
-            $adverts = $advertManager->getRepository()->findBy(array(
-                'offCharter' => false
-            ));
+            $adverts = $advertManager->getRepository()->getAdverts();
         }
 
         $advertsForwardArray = $advertManager->getRepository()->findBy(array(

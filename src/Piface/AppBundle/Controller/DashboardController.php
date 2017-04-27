@@ -10,7 +10,7 @@ class DashboardController extends BaseController
     {
         $advertManager = $this->get('app.advert.manager');
         $countAdvert = $advertManager->countAdvert($this->getUser()->getId());
-        $adverts = $advertManager->getListAdvert($this->getUser()->getId());
+        $adverts = $advertManager->getMyAdverts($this->getUser()->getId());
 
         return $this->render('PifaceAppBundle:Dashboard:show.html.twig', array(
             'countAdvert' => $countAdvert,

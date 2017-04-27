@@ -58,7 +58,7 @@ class FiltreAdvertHandler
 
 
             if (null == $category && null == $keyWord) {
-                $adverts = $this->advertManager->getRepository()->findAll();
+                $adverts = $this->advertManager->getRepository()->getAdverts();
             }
 
             if (null == $category && null != $keyWord) {
@@ -66,9 +66,7 @@ class FiltreAdvertHandler
             }
 
             if (null != $category && null == $keyWord) {
-                $adverts = $this->advertManager->getRepository()->findBy(
-                    array('category' => $category)
-                );
+                $adverts = $this->advertManager->getRepository()->findByCategory($category);
             }
 
             if(null != $category && null != $keyWord){
