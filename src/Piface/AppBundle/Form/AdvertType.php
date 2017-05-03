@@ -38,6 +38,10 @@ class AdvertType extends AbstractType
             ->add('forward', 'checkbox', array(
                'label' => "Mettre en avant",
                 'required' => false
+            ))
+            ->add('address', new AddressType(), array(
+                'label' => false,
+                'required' => true
             ));
     }
 
