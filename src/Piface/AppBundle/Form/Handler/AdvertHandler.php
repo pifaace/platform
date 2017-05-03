@@ -149,6 +149,10 @@ class AdvertHandler
                 $user->setWarning($user->getWarning() + 1);
                 $this->advert->setOffCharter(true);
 
+                if ($user->getWarning() >= 3) {
+                    $user->setEnabled(0);
+                }
+
                 return true;
             }
         }

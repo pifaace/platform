@@ -40,9 +40,12 @@ class UserAdvertController extends BaseController
         $submitForm = $advertHandler->process('create');
 
         if ($submitForm === "warning") {
+            if (!$this->getUser()->isEnabled()) {
+                return $this->redirectToRoute('fos_user_security_logout');
+            }
             $request->getSession()->getFlashBag()->add('notice', 'warning');
             return $this->redirectToRoute('piface_app_dashboard');
-        } elseif($submitForm == true) {
+        } elseif ($submitForm == true) {
             return $this->redirectToRoute('piface_app_advert', array('id' => $advert->getId()));
         }
 
@@ -71,7 +74,7 @@ class UserAdvertController extends BaseController
         if ($submitForm === "warning") {
             $request->getSession()->getFlashBag()->add('notice', 'warning');
             return $this->redirectToRoute('piface_app_dashboard');
-        } elseif($submitForm == true) {
+        } elseif ($submitForm == true) {
             return $this->redirectToRoute('piface_app_advert', array('id' => $advert->getId()));
         }
 

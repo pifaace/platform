@@ -59,6 +59,13 @@ class User extends BaseUser
      */
     protected $warning;
 
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->warning = 0;
+    }
+
     /**
      * Get id
      *

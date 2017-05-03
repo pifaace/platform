@@ -23,6 +23,7 @@
         <a href="{{ path('piface_app_advert_add') }}">Déposer une annonce !</a>
 
         <h4>{{ countAdvert }} {{ pluriel }} en ligne</h4>
+        Compteur d'avertissement : {{ warning }}
         <hr>
 
         {% if adverts is not empty %}
