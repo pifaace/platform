@@ -32,9 +32,19 @@ class AdvertManager extends BaseManager
         return $this->getRepository()->countAdvert($id);
     }
 
-    public function getListAdvert($id)
+    public function getAdverts()
     {
-        return $this->getRepository()->getListAdvert($id);
+        return $this->getRepository()->getAdverts();
+    }
+
+    public function findByCategory($category)
+    {
+        return $this->getRepository()->findByCategory($category);
+    }
+
+    public function getMyAdverts($id)
+    {
+        return $this->getRepository()->getMyAdverts($id);
     }
 
     public function findByKeyWord($keyWord)
@@ -50,5 +60,10 @@ class AdvertManager extends BaseManager
     public function isAuthorized($id)
     {
         return $this->getRepository()->isAuthorized($id);
+    }
+
+    public function getOffCharter($advertId)
+    {
+        return $this->getRepository()->getOffCharter($advertId);
     }
 }

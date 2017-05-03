@@ -13,9 +13,9 @@ class CensorProcessor
 {
     public function censorMessage($message)
     {
-        $censorWord = array('putain', 'connard');
+        $censorWords = array('putain', 'connard', 'encule', 'pd', 'salaud');
 
-        $message = str_replace($censorWord, '******', $message);
+        $message = str_replace($censorWords, '******', $message);
 
         return $message;
     }

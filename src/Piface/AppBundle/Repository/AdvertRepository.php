@@ -25,12 +25,30 @@ class AdvertRepository extends EntityRepository
         return $qb->getQuery()->getSingleScalarResult();
     }
 
-    public function getListAdvert($id)
+    public function getAdverts()
     {
         $qb = $this->createQueryBuilder('a');
 
         $qb
+            ->leftJoin('a.image', 'img')
+            ->addSelect('img')
+            ->where('a.offCharter = 0')
+            ->orderBy('a.createdAt', 'DESC');
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function getMyAdverts($id)
+    {
+        $qb = $this->createQueryBuilder('a');
+
+        $qb
+            ->leftJoin('a.category', 'cat')
+            ->addSelect('cat')
+            ->leftJoin('a.image', 'img')
+            ->addSelect('img')
             ->where('a.user = :user')
+            ->andWhere('a.offCharter = 0')
             ->setParameter(':user', $id);
 
         return $qb->getQuery()->getResult();
@@ -38,13 +56,28 @@ class AdvertRepository extends EntityRepository
 
     public function findByKeyWord($keyWord)
     {
-        $q = $this->createQueryBuilder('w');
+        $qb = $this->createQueryBuilder('w');
 
-        $q
+        $qb
             ->where('w.title LIKE :keyword')
-            ->setParameter(':keyword', '%' . $keyWord . '%');
+            ->setParameter(':keyword', '%' . $keyWord . '%')
+            ->orderBy('w.createdAt', 'DESC');
 
-        return $q->getQuery()->getResult();
+        return $qb->getQuery()->getResult();
+    }
+
+    public function findByCategory($category)
+    {
+        $qb = $this->createQueryBuilder('c');
+
+        $qb
+            ->leftJoin('c.image', 'img')
+            ->addSelect('img')
+            ->where('c.category = :category')
+            ->setParameter(':category', $category)
+            ->orderBy('c.createdAt', 'DESC');
+
+        return $qb->getQuery()->getResult();
     }
 
     public function findByOptions($category, $keyWord)
@@ -55,7 +88,8 @@ class AdvertRepository extends EntityRepository
             ->where('o.category = :category')
             ->setParameter(':category', $category)
             ->andWhere('o.title LIKE :keyword')
-            ->setParameter(':keyword', '%' . $keyWord . '%');
+            ->setParameter(':keyword', '%' . $keyWord . '%')
+            ->orderBy('o.createdAt', 'DESC');
 
         return $q->getQuery()->getResult();
     }
@@ -73,4 +107,15 @@ class AdvertRepository extends EntityRepository
         return $qb->getQuery()->getOneOrNullResult();
     }
 
+    public function getOffCharter($advertId)
+    {
+        $qb = $this->createQueryBuilder('o');
+
+        $qb
+            ->select('o.offCharter')
+            ->where('o.id = :advertId')
+            ->setParameter(':advertId', $advertId);
+
+        return $qb->getQuery()->getSingleScalarResult();
+    }
 }

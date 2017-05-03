@@ -19,11 +19,9 @@ class AdvertController extends BaseController
         $advertManager = $this->get('app.advert.manager');
         $advert = $advertManager->getRepository()->find($id);
 
-        if (null == $advert) {
-            throw $this->createNotFoundException('L\'annonce ' . $id . ' n\'existe pas');
+        if (false == $this->isGranted('view', $advert)) {
+            throw $this->createNotFoundException("Cette annonce n'existe pas");
         }
-
-
 
         return $this->render('PifaceAppBundle:Advert:showAdvert.html.twig', array(
             'advert' => $advert
@@ -44,11 +42,12 @@ class AdvertController extends BaseController
             $filterAdvertHandler->setForm($form);
             $adverts = $filterAdvertHandler->process();
         } else {
-            $adverts = $advertManager->getRepository()->findAll();
+            $adverts = $advertManager->getRepository()->getAdverts();
         }
 
         $advertsForwardArray = $advertManager->getRepository()->findBy(array(
-            'forward' => true
+            'forward' => true,
+            'offCharter' => false
         ));
 
         $advertsForward = $this->randomAdvertForward($advertsForwardArray);
@@ -59,7 +58,6 @@ class AdvertController extends BaseController
             'form' => $form->createView()
         ));
     }
-
 
     private function checkUrl(Request $request)
     {
@@ -85,7 +83,7 @@ class AdvertController extends BaseController
         if (count($advertForwardArray) > 3) {
             $rand_advert = array_rand($advertForwardArray, 3);
 
-            for ($i = 0 ; $i < 3; $i++) {
+            for ($i = 0; $i < 3; $i++) {
                 $advertRand[] = $advertForwardArray[$rand_advert[$i]];
             }
 

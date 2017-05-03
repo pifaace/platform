@@ -8,6 +8,7 @@ use Piface\AppBundle\Entity\Advert;
 use Piface\AppBundle\Form\AdvertType;
 use Piface\AppBundle\Form\EditAdvertType;
 use Piface\AppBundle\Security\ActionAdvertVoter;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -26,7 +27,7 @@ class UserAdvertController extends BaseController
         );
     }
 
-    public function addAction()
+    public function addAction(Request $request)
     {
         $advert = new Advert;
         $form = $this->createForm(new AdvertType(), $advert);
@@ -36,7 +37,15 @@ class UserAdvertController extends BaseController
         $advertHandler->setAdvert($advert);
         $advertHandler->setForm($form);
 
-        if ($advertHandler->process('create')) {
+        $submitForm = $advertHandler->process('create');
+
+        if ($submitForm === "warning") {
+            if (!$this->getUser()->isEnabled()) {
+                return $this->redirectToRoute('fos_user_security_logout');
+            }
+            $request->getSession()->getFlashBag()->add('notice', 'warning');
+            return $this->redirectToRoute('piface_app_dashboard');
+        } elseif ($submitForm == true) {
             return $this->redirectToRoute('piface_app_advert', array('id' => $advert->getId()));
         }
 
@@ -45,7 +54,7 @@ class UserAdvertController extends BaseController
         ));
     }
 
-    public function editAction($id)
+    public function editAction(Request $request, $id)
     {
         $advertManager = $this->get('app.advert.manager');
         $advert = $advertManager->getRepository()->find($id);
@@ -60,7 +69,12 @@ class UserAdvertController extends BaseController
         $advertHandler->setUser($this->getUser());
         $advertHandler->setForm($editForm);
 
-        if ($advertHandler->process('edit')) {
+        $submitForm = $advertHandler->process('edit');
+
+        if ($submitForm === "warning") {
+            $request->getSession()->getFlashBag()->add('notice', 'warning');
+            return $this->redirectToRoute('piface_app_dashboard');
+        } elseif ($submitForm == true) {
             return $this->redirectToRoute('piface_app_advert', array('id' => $advert->getId()));
         }
 

@@ -76,7 +76,7 @@ class Advert
      * @ORM\ManyToOne(targetEntity="Piface\UserBundle\Entity\User")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $user;
+    protected $user;
 
     /**
      * @Assert\NotBlank()
@@ -84,25 +84,35 @@ class Advert
      * @ORM\ManyToOne(targetEntity="Piface\AppBundle\Entity\Category", inversedBy="adverts")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $category;
+    protected $category;
 
     /**
      * @ORM\OneToOne(targetEntity="Piface\AppBundle\Entity\Image", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=true)
      *
      */
-    private $image;
+    protected $image;
 
     /**
      * @var boolean
      *
      * @ORM\Column(name="forward", type="boolean")
      */
-    private $forward;
+    protected $forward;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="off_charter", type="boolean")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    protected $offCharter;
+
 
     public function __construct()
     {
         $this->createdAt = new \DateTime();
+        $this->offCharter = false;
     }
 
     /**
@@ -310,5 +320,28 @@ class Advert
     public function updateDate()
     {
         $this->setUpdatedAt(new \DateTime());
+    }
+
+    /**
+     * Set OffCharter
+     *
+     * @param boolean $offCharter
+     * @return Advert
+     */
+    public function setOffCharter($offCharter)
+    {
+        $this->offCharter = $offCharter;
+
+        return $this;
+    }
+
+    /**
+     * Get OffCharter
+     *
+     * @return boolean 
+     */
+    public function getOffCharter()
+    {
+        return $this->offCharter;
     }
 }

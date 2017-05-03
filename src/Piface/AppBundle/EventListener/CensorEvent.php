@@ -47,6 +47,4 @@ class CensorEvent extends Event
     {
         $this->message = $message;
     }
-
-
 }

@@ -4,6 +4,15 @@
 
 {% block page_content %}
     {% block advert %}
+        {#{% if advert.offCharter == true %}#}
+            {#<div class="alert alert-danger">#}
+                {#<p>ATTENTION : Cette annonce a été jugé comme non respect de la charte de respect. Cette annonce n'est donc pas mise en ligne et sera supprimer...#}
+                {#<br>#}
+                {#De plus vous recevez un avertissement.</p>#}
+                {#<p>Pour rappel, au bout de 3 avertissements, votre compte se vera banni définitivement.</p>#}
+            {#</div>#}
+        {#{% endif %}#}
+
         <h2>{{ advert.title }}</h2>
         <i>Publiée le {{ advert.createdAt|date('d/m/Y') }} à {{ advert.createdAt|date('H:i:s') }}</i><br>
         {% if advert.image.imageFile is defined %}
