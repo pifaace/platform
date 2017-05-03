@@ -108,6 +108,14 @@ class Advert
      */
     protected $offCharter;
 
+    /**
+     *
+     * @ORM\OneToOne(targetEntity="Piface\AppBundle\Entity\Address", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     *
+     * @Assert\Valid()
+     */
+    protected $address;
 
     public function __construct()
     {
@@ -343,5 +351,28 @@ class Advert
     public function getOffCharter()
     {
         return $this->offCharter;
+    }
+
+    /**
+     * Set address
+     *
+     * @param Address $address
+     * @return Advert
+     */
+    public function setAddress(Address $address)
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    /**
+     * Get address
+     *
+     * @return Address
+     */
+    public function getAddress()
+    {
+        return $this->address;
     }
 }

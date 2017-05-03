@@ -37,6 +37,32 @@
             {{ form_errors(form.image) }}
         </div>
 
+        <h3>Localisation</h3>
+
+        <div class="form-group">
+            {{ form_label(form.address.address) }}
+            {{ form_widget(form.address.address, {'attr': {'class': 'form-control medium'}}) }}
+            {{ form_errors(form.address.address) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_label(form.address.additionalAddress) }}
+            {{ form_widget(form.address.additionalAddress, {'attr': {'class': 'form-control medium'}}) }}
+            {{ form_errors(form.address.additionalAddress) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_label(form.address.postalCode) }}
+            {{ form_widget(form.address.postalCode, {'attr': {'class': 'form-control small'}}) }}
+            {{ form_errors(form.address.postalCode) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_label(form.address.town) }}
+            {{ form_widget(form.address.town, {'attr': {'class': 'form-control small'}}) }}
+            {{ form_errors(form.address.town) }}
+        </div>
+
         <div class="form-group">
             {{ form_label(form.forward) }}
             {{ form_widget(form.forward) }}
